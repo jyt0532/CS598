@@ -12,7 +12,6 @@ get_yelp_page = \
         'http://www.yelp.com/search?find_desc=&find_loc={0}' \
         '&ns=1#cflt=restaurants&start={1}'.format(zipcode, page_num)
 
-
 def crawl_page(zipcode, page_num, verbose=False):
 	page_url = get_yelp_page(zipcode, page_num)
 	soup = BeautifulSoup(urllib2.urlopen(page_url).read())

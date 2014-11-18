@@ -1,4 +1,5 @@
-from BeautifulSoup import BeautifulSoup
+#from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 from urlparse import urljoin
 import urllib2
 import argparse
@@ -17,15 +18,17 @@ def crawl_page(page_num):
     page_url = get_yelp_page(61801, page_num)
     soup = BeautifulSoup(urllib2.urlopen(page_url).read())
 
-    restaurants = soup.findAll('div', attrs={'class':re.compile(r'^search-result natural-search-result')})
+#    restaurants = soup.findAll('div', attrs={'class':re.compile(r'^search-result natural-search-result')})
+    restaurants = soup.findAll('div',{'class': 'search-result'})
     arr = []
     for r in restaurants:
         dic = {}
         title = r.find('a', {'class':'biz-name'}) 
-        dic["name"] = title.getText()
+        dic["review_count"] = int(r.find('span', {'class':'review-count'}).get_text().split()[0])
+        dic["name"] = title.get_text()
         dic["review_url"] = title.get('href')
-        dic["address"] = r.find('div', {'class':'secondary-attributes'}).address.getText()
-        dic["rating"] = r.find('i', {'class':re.compile(r'^star-img')}).img['alt']
+        dic["address"] = r.find('div', {'class':'secondary-attributes'}).address.get_text()
+        dic["rating"] = r.find('i', {'class':re.compile(r'^star-img')}).img['alt'].split()[0]
 
         categories = r.findAll('span', {'class':'category-str-list'})
         dic["category"] = map(lambda x: x.getText() if x.getText() else None, categories)

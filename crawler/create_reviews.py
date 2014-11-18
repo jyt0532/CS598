@@ -9,7 +9,7 @@ import time
 import random
 import json
 import time
-
+import math
 def reviews_in_page_url(page_url, name):
     reviews_arr = []
     dic = {}
@@ -25,13 +25,17 @@ def reviews_in_page_url(page_url, name):
 
 def crawl_reviews(): 
     default_url = "http://www.yelp.com"
-    json_data = json.loads(open("data/restaurant_index.json").read())
+    json_data = json.loads(open("data/restaurant_index_2.json").read())
     total_reviews = []
+    count = 0
     for elem in json_data:
-        page_url = default_url + elem["review_url"]
-        total_reviews.append(reviews_in_page_url(page_url, elem["name"]))
-        break
+        num_of_reviews = elem["review_count"]
+        for i in range(int(math.ceil(num_of_reviews/40))):
+            page_url = default_url + elem["review_url"] + "?start=" + str(i*40)
+            total_reviews.append(reviews_in_page_url(page_url, elem["name"]))
+        count = count + 1
+        print count
     with open('reviews.json', 'w') as outfile:
-       json.dump(total_reviews, outfile)
+       json.dump(total_reviews, outfile, indent=2)
 crawl_reviews()
 

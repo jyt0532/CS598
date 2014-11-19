@@ -46,8 +46,8 @@ def crawl_all_pages(num_of_pages):
 
     print "writing to json file"
 
-    with open('output.json', 'w') as outfile:
+    with open('output1.json', 'w') as outfile:
         json.dump(total_arr, outfile, indent=2)
 
-crawl_all_pages(42)
+crawl_all_pages(2)
 

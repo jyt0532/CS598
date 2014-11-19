@@ -1,0 +1,7 @@
+The util directory contains python scripts that process, validate and check the crawled data.
+
+- validate.py
+functionality: count how many DIFFERENT restaurants have been crawled from yelp
+
+-clearNoisyCharacter.py
+functionality: clear useless character in "name" of restaurants. For instance, some name of restaurants in raw data is "\n   Cravings   ". It should be converted to "Cravings"

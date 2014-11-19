@@ -25,7 +25,7 @@ def reviews_in_page_url(page_url, name):
 
 def crawl_reviews(): 
     default_url = "http://www.yelp.com"
-    json_data = json.loads(open("data/restaurant_index_2.json").read())
+    json_data = json.loads(open("data/restaurant_index_3.json").read())
     total_reviews = []
     count = 0
     for elem in json_data:

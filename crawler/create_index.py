@@ -25,7 +25,7 @@ def crawl_page(page_num):
         try:
             dic["review_count"] = int(r.find('span', {'class':'review-count'}).get_text().split()[0])
         except Exception, e:
-            dic["review-count"] = "FAIL"
+            dic["review_count"] = 0
 
         try:
             dic["name"] = title.get_text()
@@ -61,6 +61,16 @@ def crawl_page(page_num):
         arr.append(dic)
     return arr
 
+def remove_duplicate(arr):
+    ret = []
+    name_set = []
+    arr.sort()
+    for i in range(len(arr)):
+        if arr[i]["name"] not in name_set:
+            name_set.append(arr[i]["name"])
+            ret.append(arr[i])
+    return ret
+
 def crawl_all_pages(num_of_pages):
     total_arr = []
     for i in range(num_of_pages):
@@ -69,7 +79,7 @@ def crawl_all_pages(num_of_pages):
         time.sleep(2)
 
     print "writing to json file"
-
+    total_arr = remove_duplicate(total_arr)
     with open('output1.json', 'w') as outfile:
         json.dump(total_arr, outfile, indent=2)
 

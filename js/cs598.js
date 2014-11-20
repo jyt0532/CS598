@@ -27,7 +27,7 @@ function _init() {
   });
 
 //  $("#login").click(_handle_login_request);
-  ajax_call(
+/*  ajax_call(
     "./post.php?request=category",
     null,
     function(result) {
@@ -47,7 +47,7 @@ function _init() {
     function() {
       alert("Updating categories failed");
     }
-  );
+  );*/
 }
 
 function _handle_login_request(){

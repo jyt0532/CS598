@@ -18,11 +18,15 @@ def append_reviews_from_page_url(restaurant_reviews, page_url, name):
         reviews_arr = restaurant_reviews["reviews"]
 
     soup = BeautifulSoup(urllib2.urlopen(page_url).read())
-    #print soup.prettify()
-    page_reviews = soup.findAll("p", {"itemprop": "description"})
-    for elem in page_reviews:
-#        print elem.get_text()
-        reviews_arr.append(elem.get_text())
+    review_div = soup.findAll("div", {"class": "review--with-sidebar"})
+    for elem in review_div:
+        current_review = {}
+        current_review["review"] = elem.p.get_text()
+        current_review["rating"] = elem.div.findNext("meta", {"itemprop": "ratingValue"})["content"]
+        current_review["user-name"] = elem.div.nextSibling.findNext("a", {"class": "user-display-name"}).get_text()
+        current_review["user-location"] = elem.div.findNext("li", {"class": "user-location"}).get_text()
+        current_review["date"] = elem.div.findNext("meta", {"itemprop": "datePublished"})["content"]
+        reviews_arr.append(current_review)
     restaurant_reviews["reviews"] = reviews_arr
 
 def crawl_reviews(): 

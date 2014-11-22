@@ -38,7 +38,10 @@ def crawl_page(page_num):
             dic["review_url"] = "FAIL"
 
         try:
-            dic["address"] = r.find('div', {'class':'secondary-attributes'}).address.get_text()
+            ori = r.find('div', {'class':'secondary-attributes'}).address
+            address = [ori.next.string.strip()]
+            address = address + [ori.next.next.next.string.strip()]
+            dic["address"] = address
         except Exception, e:
             dic["address"] = "FAIL"
 
@@ -49,12 +52,12 @@ def crawl_page(page_num):
 
         try:
             categories = r.findAll('span', {'class':'category-str-list'})
-            dic["category"] = map(lambda x: x.getText() if x.getText() else None, categories)
+            dic["category"] = [re.sub('[ \n]','', c.get_text()).split(',') for c in categories if c.getText()][0]
         except Exception, e:
             dic["category"] = "FAIL"
 
         try:
-            dic["phone"] = r.find('div', {'class':'secondary-attributes'}).span.getText() 
+            dic["phone"] = r.find('span', {'class':'biz-phone'}).getText().strip()
         except Exception, e:
             dic["phone"] = "FAIL"
 

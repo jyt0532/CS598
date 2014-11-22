@@ -1,0 +1,136 @@
+html {overflow-y: scroll;}
+.post-div {
+	width: 600px;
+}
+
+.post-div .title {
+  width: 600px;
+}
+
+.search-div .keyword {
+  width: 140px;
+}
+
+.p_inline{
+	margin-left: 75px;
+	margin-top: -30px;
+}
+
+.s_inline{
+	margin-left: 75px;
+	margin-top: -30px;
+	width:831px;
+}
+.form-group{
+	float:left;
+	display:inline;
+}
+
+.text_area {
+	height: 200px;
+	width: 580px;
+}
+
+.q_text_area {
+	height:200px;
+	width: 600px;
+}
+
+.edit_area {
+	height: 200px;
+	width: 556px;
+}
+
+.float_left {
+  float: left;
+}
+
+.s_results{
+  float:left;
+}
+
+.q_question {
+  width: 580px;
+}
+
+.q_titles {
+  width: 300px;
+}
+.s_QandA{
+  float:left;
+}
+#result_detail_div {
+  margin-left: 26px;
+  margin-top: -110px;
+
+}
+
+.solutions {
+  float: left;
+  width: 100%;
+}
+
+.left-right .left {
+  float: left;
+  position: relative;
+}
+
+.left-right .right {
+  float: right;
+  text-align: right;
+  position: relative;
+}
+#register{
+  margin-left: 0px;
+  margin-top: 0px;
+  color: blue;
+}
+#search_button{
+  margin-top: -10px;
+}
+.thumbnail{
+  width: 570px;
+}
+.to_right{
+  text-align: right;
+}
+#search_category{
+  width: 17%;
+}
+#post_category{
+  width: 152%;
+}
+
+#search_button{
+  margin-top: 1px;
+  margin-left: 10px;
+}
+#username{
+  width: 33%;
+}
+#password{
+  width: 33%;
+}
+#result_list_div{
+  margin-top: 16px;
+}
+.slide_container{
+  height: 400px;
+}
+#myCarousel{
+  background-color: grey;
+}
+.carousel-caption{
+  margin-bottom: 60px;
+}
+#post_solution_button{
+  margin-top: -3px;
+}
+#solution_text{
+  height: 200px;
+}
+.editor{
+  height: 200px;
+  margin-top: 20px;
+  overflow: scroll;
+}

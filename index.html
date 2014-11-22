@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/cs598.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./cs598.css" />
+
+<body>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<!--<script src="bootstrap/js/bootstrap.min.js"></script>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+</br>
+</br>
+</br>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="navbar-brand" href="#">Interview Gurus</a>
+        <div class="navbar-collapse collapse">
+          <!--<form class="navbar-form pull-right" name="form" method="post" action="login.php">
+              <a id="newuser_href" href="#NewUser">New User</a>
+	          <input class="span2 form-control" name="username" type="text" placeholder="UserName" id="username">
+            <input class="span2 form-control" name="passwd" type="password" placeholder="Password" id="password">
+            <button type="submit" name="button" class="btn btn-default" id="login">Sign in</button>
+            <button type="submit" class="btn btn-default register" id="register">Register</button> 
+	        </form>-->
+        </div>
+       </div><!--end container -->
+      </div><!--end navbar inner -->
+    </div> <!--end navbar -->
+
+ <div class="container">
+            <div class="nav nav-tabs" id="myTab">
+ 		 <li class=active> <a id="home_tab" href="#Home" data-toggle="tab">Home</a></li>
+		 <li><a id="search_tab" href="#Search" data-toggle="tab">Search</a></li>
+		 <li><a id="post_tab" href="#Post" data-toggle="tab">Post</a></li>
+            </div> 
+
+      <div class="tab-content">
+        <div class="home_div" id="home_div">    
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="item active">
+                <div class="container slide_container">
+                  <div class="carousel-caption">
+                    <h1>Hello, welcome to Restaurant Recommendation</h1>
+                    <h3>Start searching for the best customizied restaurant</h3>
+	            <p><a class="btn btn-lg btn-primary" id="learn_more" role="button">Learn more</a></p>        	
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="container slide_container">
+                  <div class="carousel-caption">
+                    <h1>Search for a restaurant</h1>
+                    <h3>Pick a specific category or enter a keyword</h3>
+		    <p><a class="btn btn-lg btn-primary" id="search_tab_button" role="button">Search now</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="container slide_container">
+                  <div class="carousel-caption">
+                    <h1>Distribute your quota!</h1>
+	                  <h3>Do not wait until the last minute</h3>
+                    <p><a class="btn btn-lg btn-primary" id="post_tab_button" role="button">Distribute now!</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+          </div><!-- /.carousel -->
+        </div>
+
+        <div id="search_div" class="search-div">
+          <br>
+          <div class="form-group float_left">
+            <label class="control-label" for="keyword">Keyword:</label>
+            <div class="controls">
+	            <div class="s_inline">
+                <input id="keyword" type="text" class="keyword form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group float_left">
+            <label class="control-label" for="category">Category:</label>
+            <div class="controls">
+	            <div class="s_inline">
+                <select id="search_category" class="form-control col-xs-2">...</select>
+                <button id="search_button" class="btn btn-primary" type="button">Search</button>
+              </div> 
+	            <div id="search_result_div" class="s_results">
+                <div id="result_list_div" class="s_results q_titles">
+                </div>
+                <div id="result_detail_div" class="s_QandA">
+                  <div class="page-header">
+                    <h1>Customized feature</h1>
+                  </div>
+                  <div><span>Quota remained: </span> <span>15</span></div>
+                  <div><span>Location</span><div>
+                  <div class="btn-group">
+                      <button type="button" class="btn btn-default">1</button>
+                      <button type="button" class="btn btn-default">2</button>
+                      <button type="button" class="btn btn-default">3</button>
+                      <button type="button" class="btn btn-default">4</button>
+                      <button type="button" class="btn btn-default">5</button>
+                  </div>
+                  <div><span>Price</span><div>
+                  <div class="btn-group">
+                      <button type="button" class="btn btn-default">1</button>
+                      <button type="button" class="btn btn-default">2</button>
+                      <button type="button" class="btn btn-default">3</button>
+                      <button type="button" class="btn btn-default">4</button>
+                      <button type="button" class="btn btn-default">5</button>
+                  </div>
+                  <div><span>Category</span><div>
+                  <div class="btn-group" role="group" arial-label="Third group">
+                      <button type="button" class="btn btn-default">1</button>
+                      <button type="button" class="btn btn-default">2</button>
+                      <button type="button" class="btn btn-default">3</button>
+                      <button type="button" class="btn btn-default">4</button>
+                      <button type="button" class="btn btn-default">5</button>
+                  </div>
+                  <div><span>Service</span><div>
+                  <div class="btn-group" role="group" arial-label="Fourth group">
+                      <button type="button" class="btn btn-default">1</button>
+                      <button type="button" class="btn btn-default">2</button>
+                      <button type="button" class="btn btn-default">3</button>
+                      <button type="button" class="btn btn-default">4</button>
+                      <button type="button" class="btn btn-default">5</button>
+                  </div>
+                  <div><span>Overall</span><div>
+                  <div class="btn-group" role="group" arial-label="Fifth group">
+                      <button type="button" class="btn btn-default">1</button>
+                      <button type="button" class="btn btn-default">2</button>
+                      <button type="button" class="btn btn-default">3</button>
+                      <button type="button" class="btn btn-default">4</button>
+                      <button type="button" class="btn btn-default">5</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+   </div><!--end search division-->
+   <div class="post-div" id="post_div">
+      <br>
+      <form role="form">
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <div class="p_inline">
+            <select id="post_category" class="form-control">...</select>
+          </div>
+        </div>
+
+        <div class="form-group">
+         <label for="title">Title:</label>
+          <div class= "p_inline"> 
+	   <input type="text" class="title form-control"
+              placeholder="Type title here"
+              id="question_title_text"
+              rows="1"
+              maxlength="100">
+	  </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="question">Question:</label>
+           <div class="p_inline">
+	    <textarea type="text" class="q_text_area form-control"
+              placeholder="Type question here"
+              id="question_text"
+              rows="10"
+              maxlength="5000"></textarea>
+            </br>
+            <button id="post_question_button" class="btn btn-primary" type="button">Post Question</button><br>
+         </div>
+	 </div>
+    </form>
+
+   </div>
+  </div><!--end tab-content-->
+
+ </div><!--end container-->
+
+</body>
+
+</html>
+

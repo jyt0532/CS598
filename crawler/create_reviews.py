@@ -31,13 +31,13 @@ def append_reviews_from_page_url(restaurant_reviews, page_url, name):
 
 def crawl_reviews(): 
     default_url = "http://www.yelp.com"
-    json_data = json.loads(open("data/restaurant_index_3.json").read())
+    json_data = json.loads(open("data/restaurant_index_4.json").read())
     total_reviews = []
     count = 0
     for elem in json_data:
         num_of_reviews = elem["review_count"]
         restaurant_reviews = {}
-        for i in range(int(math.ceil(num_of_reviews/40))):
+        for i in range(int(math.ceil(num_of_reviews/40.0))):
             page_url = default_url + elem["review_url"] + "?start=" + str(i*40)
             append_reviews_from_page_url(restaurant_reviews, page_url, elem["name"])
         total_reviews.append(restaurant_reviews)

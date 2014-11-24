@@ -18,7 +18,7 @@ for restaurant in restaurant_reviews:
   if "name" not in restaurant:
     continue
   print idx
-  f = open("../LARA/restaurant" + str(idx) + ".dat", 'w')
+  f = open("../LARA/Reviews/restaurant" + str(idx) + ".dat", 'w')
   idx += 1
   f.write ("<Hotel Name> " + restaurant["name"].strip() + "\n")
   f.write ("<Hotel Address>" + "\n")
@@ -41,6 +41,9 @@ for restaurant in restaurant_reviews:
   
     f.write ("<Date> " + rv["date"] + "\n")
     f.write ("<Overall> " + rv["rating"] + "\n")
+    f.write("<environment> " + str(int(float(rv["rating"]))) + "\n")
+    f.write("<taste> " + str(int(float(rv["rating"]))) + "\n")
+    f.write("<price> " + str(int(float(rv["rating"]))) + "\n")
     f.write("\n")
   f.close()
 

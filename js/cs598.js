@@ -1,7 +1,6 @@
 $(document).ready(_init);
 var open_code_flag = 1;
 function _init() {
-  search_mode();
   show_aspects();
   button_click_action();
   quota_control();
@@ -40,7 +39,11 @@ function search_mode(){
     $('#search_div').show();
 }
 function append_radios(new_div){
-    
+    var img_div = new_elem("div");
+    for(var i = 0; i < 5; i++){
+        img_div.append($('<img>').addClass("img-not-selected rating-img").attr("num", i));    
+    }
+    new_div.append(img_div);
 }
 function show_aspects(){
     result = ["Price", "Location" ,"Environment"];
@@ -50,7 +53,8 @@ function show_aspects(){
         null,
         function(result){
             for(var i=0; i < result.length; i++){
-                var new_div = new_elem("div", new_elem("span", result[i]));
+   
+            var new_div = new_elem("div", new_elem("span", result[i]));
                 append_radios(new_div);
                 $('#result_detail_div').append(new_div);
             }
@@ -70,12 +74,21 @@ function show_aspects(){
 function get_quota(elem){
     return parseInt(elem.next().text());
 }
+function reset_rating(cur_elem){
+   $(cur_elem).parent().children().removeClass('img-selected').addClass('img-not-selected'); 
+}
 function quota_control(){
-    var total = get_quota($('input[name=first-radios]:checked'))
-                + get_quota($('input[name=second-radios]:checked'))
-                + get_quota($('input[name=third-radios]:checked'))
-                + get_quota($('input[name=fourth-radios]:checked'))
-                + get_quota($('input[name=fifth-radios]:checked'));
+    $('.rating-img').click(function(){
+        var cur_elem = event.currentTarget;
+        reset_rating(cur_elem);
+        var rating = parseInt($(cur_elem).attr("num"));
+        for(var i = 0 ; i <= rating; i++){
+            $(cur_elem).removeClass('img-not-selected').addClass('img-selected');
+            var prev = cur_elem.previousSibling;
+            cur_elem = prev;
+        }
+        
+    });
 
 }
 function button_click_action(){

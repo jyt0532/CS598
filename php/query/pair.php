@@ -1,4 +1,5 @@
 <?php
+
 class Pair {
   public $first = null;
   public $second = null;
@@ -16,5 +17,6 @@ class Pair {
     }
     return $p1->second < $p2->second ? 1 : -1;
   }
+
 }
 ?>

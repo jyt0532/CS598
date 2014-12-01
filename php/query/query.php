@@ -4,12 +4,24 @@ include 'pair.php';
 class Query {
   private $restaurants = null;
   private $categories = null; 
-  private $restaurant_id_mapping_path;
+  private $restaurant_id_mapping_path = null;
+  private $rating_path = null;
 
-  function __construct($restaurant_index_path, $category_path, $mapping) {
-    $this -> restaurants = json_decode(file_get_contents($restaurant_index_path), true);
-    $this -> categories = json_decode(file_get_contents($category_path), true);
-    $this -> restaurant_id_mapping_path = $mapping;
+  function __construct($category_path, $restaurant_index_path = null, $mapping_path = null, $rating_path = null) {
+    if($restaurant_index_path != null) {
+      $this -> restaurants = json_decode(file_get_contents($restaurant_index_path), true);
+    }
+    if($category_path != null) {
+      $this -> categories = json_decode(file_get_contents($category_path), true);
+    }
+
+    if($mapping_path != null) {
+      $this -> restaurant_id_mapping_path = $mapping_path;
+    }
+
+    if($rating_path != null) {
+      $this -> rating_path = $rating_path;
+    }
   }
 
   /**
@@ -59,12 +71,23 @@ class Query {
 
 
   public function retrieveRating($restaurants) {
-    /*
-    $mapping = json_decode(file_get_contents($restaurant_id_mapping_path), true);
-    foreach($restaurants as &$rest) {
-         
+    if($this -> restaurant_id_mapping_path == "NIL" || $this -> rating_path == "NIL") {
+      return null;
     }
-     */
+    $mapping = json_decode(file_get_contents($this -> restaurant_id_mapping_path), true);
+    $rating = json_decode(file_get_contents($this -> rating_path), true);
+    $ret = array();
+    foreach($restaurants as &$rest) {
+      $name = $rest["name"]; 
+      if(array_key_exists($name, $mapping)) {
+        $id = $mapping[$name];
+        $rate = $rating[$id];
+        $pair = new Pair($rest, $rate);
+        array_push($ret, $pair);
+      }
+    }
+
+    return $ret;
   }
 
   /**

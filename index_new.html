@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Grayscale - Start Bootstrap Theme</title>
+        <title>Restaurant</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +21,7 @@
         <link href="font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,14 +35,14 @@
     <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <nav id="main-nav" class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">
-                    <i class="fa fa-play-circle"></i>  <span class="light">Start Searching</span>
+                <a id="start-searching" class="navbar-brand page-scroll" href="#page-top">
+                    <i class="fa fa-cutlery"></i> <span class="light">FoodHero</span>
                 </a>
             </div>
 
@@ -74,8 +75,8 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">Restaurant</h1>
-                        <p class="intro-text">Recommend restaurant via customized reauest<br>Created by XXX</p>
-                        <a href="#about" class="btn btn-circle page-scroll">
+                        <h4 class="intro-text">Recommend restaurant via customized reauest<br>Created by XXX</h4>
+                        <a href="#search" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
                     </div>
@@ -83,17 +84,38 @@
             </div>
         </div>
         </header>
-
+        <div id="search-result" class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="new-input-area">
+                        <span>YA</span>
+                    </div>    
+                    <div class="map-area">
+                        <span>YA</span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <span>YA</span>
+                </div>
+            </div>
+        </div>
         <!-- Search Section -->
-        <section id="about" class="container content-section text-center">
+        <section id="search" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <div id="result_detail_div">
                     <div class="page-header">
                         <h1>Customized feature</h1>
                     </div>
-                    <div><span>Quota remained: </span> <span id="quota_num">15</span></div>
+                    <div class="input-area">
+                        <div><span>Quota remained: </span> <span id="quota_num">9</span></div>
+                    </div>
                 </div>
+                <br>
+                <select multiple id="tags" style="width:300px">
+                </select>
+                <br>
+                <button id="search-btn" class="btn btn-default btn-lg">Search result</button>
             </div>
         </div>
         </section>
@@ -169,9 +191,13 @@
         <script src="js/cs598.js"></script>
         <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
-
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
         <!-- Custom Theme JavaScript -->
         <script src="js/grayscale.js"></script>
+        <script src="select2-3.5.2/select2.min.js"></script>
+        <script src="select2-3.5.2/"></script>
+        <link href="select2-3.5.2/select2.css" rel="stylesheet">
 
     </body>
 

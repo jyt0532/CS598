@@ -55,6 +55,10 @@ a:focus {
     text-decoration: none;
     color: #11505d;
 }
+.select2-input .select2-focused{
+    margin: auto;
+    height: 28px;
+}
 .img-selected{
     content:url("../img/star_blue.svg");
     height: 30px;

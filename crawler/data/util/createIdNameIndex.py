@@ -13,5 +13,11 @@ for elem in files:
   head = len("<Hotel Name> ")
   dotPos = elem.find('.')
   dic[elem[:dotPos]] = firstLine[head:].strip()
-  print elem[:dotPos], dic[elem[:dotPos]]
+  f.close()
+
+with open('IDMapping.json', 'w') as output:
+  json.dump(dic, output)
+
+
+
 

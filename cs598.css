@@ -1,4 +1,13 @@
 html {overflow-y: scroll;}
+.single_result{
+    overflow: hidden;
+}
+.left_result{
+    float:left;
+}
+.right_result{
+    float: right;
+}
 .post-div {
 	width: 600px;
 }

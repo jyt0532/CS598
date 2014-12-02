@@ -116,7 +116,7 @@ function search_button_click_action(){
         $('#search-result').show();
         $('.result_area').clone().appendTo('.new-input-area');
         quota_control();
-        get_catogories();
+        //get_catogories();
         $('.page-header').hide();
         $('.select2-container').css('margin-left', '0px');
         $('#s2id_tags').css('width', '200px');
@@ -139,11 +139,13 @@ function search_button_click_action(){
             },
             function(result){
                 for(var i = 0; i < result.length; i++){
-                    var restaurant_div = new_elem("div","" , "result"+i);
+                    var restaurant_div = new_elem("div","" , "result"+i).addClass("single-result");
                     var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result");
                     var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result");
-                    result_right.append(new_elem("div", result[i].name, "result"+ i + "_name"));
-                    result_left.append(new_elem("div", result[i].price, "result"+ i + "_star"));
+                    result_right.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
+                    result_right.append(new_elem("div", result[i].first.rating, "result"+ i + "_rating"));
+                    restaurant_div.append(result_left);
+                    restaurant_div.append(result_right);
                     $('.result-area').append(restaurant_div);
                 }
             },

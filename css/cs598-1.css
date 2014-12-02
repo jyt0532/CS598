@@ -55,6 +55,16 @@ a:focus {
     text-decoration: none;
     color: #11505d;
 }
+.single_result{
+    overflow: hidden;
+}
+.left_result{
+    float:left;
+}
+.right_result{
+    float: right;
+}
+
 .select2-input .select2-focused{
     margin: auto;
     height: 28px;

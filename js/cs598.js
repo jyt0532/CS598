@@ -130,7 +130,7 @@ function search_button_click_action(){
         for(var i = 0; i < 3; i++){
             pref.push(parseInt($('.rating-div-' + i).attr("rating")));
         }
-       /* 
+        
         ajax_call(
             "php/server/ratings.php",
             {
@@ -140,8 +140,10 @@ function search_button_click_action(){
             function(result){
                 for(var i = 0; i < result.length; i++){
                     var restaurant_div = new_elem("div","" , "result"+i);
-                    restaurant_div.append(new_elem("div", result[i].a, "result"+ i + "_name"));
-                    restaurant_div.append(new_elem("div", result[i].b, "result"+ i + "_star"));
+                    var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result");
+                    var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result");
+                    result_right.append(new_elem("div", result[i].name, "result"+ i + "_name"));
+                    result_left.append(new_elem("div", result[i].price, "result"+ i + "_star"));
                     $('.result-area').append(restaurant_div);
                 }
             },
@@ -149,10 +151,10 @@ function search_button_click_action(){
                 alert("Get rating failure");
             },
             "post"
-        );*/
+        );
 
-        var result = a = [{"name":"balckdog", "price":2}, {"name":"bankok", "price":"3"}];
-        render_restaurant_result(result);
+        //var result = a = [{"name":"balckdog", "price":2}, {"name":"bankok", "price":"3"}];
+        //render_restaurant_result(result);
     });
 }
 function render_restaurant_result(result){

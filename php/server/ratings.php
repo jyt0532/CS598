@@ -6,6 +6,11 @@
   $category = json_decode($raw_category);
   $raw_preference = $_POST["preference"];
   $preference = json_decode($raw_preference);
+  if(!is_array($preference)) {
+      echo "parameter parse error\n";
+      return;
+  }
+
 
 
   $q = new Query("../db/category.json", "../db/restaurant_index_5.json", "../db/mapping.json", "../db/rating.json");

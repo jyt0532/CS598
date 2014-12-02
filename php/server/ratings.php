@@ -13,9 +13,10 @@
 
 
 
-  $q = new Query("../db/category.json", "../db/restaurant_index_5.json", "../db/mapping.json", "../db/rating.json");
+  $q = new Query("../db/category.json", "../db/restaurant_index_5.json", "../db/mapping.json", "../db/rating.json", "../db/RestaurantAddress.json");
 
   $restaurants = $q -> getAllRestaurantWithCategory($category);
+  $restaurants = $q -> convertRestaurantAddressToCoord($restaurants);
   $ratingPairs = $q -> retrieveRating($restaurants);
   foreach($ratingPairs as &$pair) {
     $pair -> second = dot($pair -> second, $preference);

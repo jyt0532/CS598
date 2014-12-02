@@ -6,8 +6,9 @@ class Query {
   private $categories = null; 
   private $restaurant_id_mapping_path = null;
   private $rating_path = null;
+  private $restaurant_address = null;
 
-  function __construct($category_path, $restaurant_index_path = null, $mapping_path = null, $rating_path = null) {
+  function __construct($category_path, $restaurant_index_path = null, $mapping_path = null, $rating_path = null, $restaurant_address = null) {
     if($restaurant_index_path != null) {
       $this -> restaurants = json_decode(file_get_contents($restaurant_index_path, true), true);
     }
@@ -22,6 +23,11 @@ class Query {
     if($rating_path != null) {
       $this -> rating_path = $rating_path;
     }
+
+    if($restaurant_address != null) {
+      $this -> restaurant_address = $restaurant_address;
+    }
+
   }
 
   /**
@@ -69,6 +75,31 @@ class Query {
     return $ret;
   }
 
+  /**
+   * the function convert the address of the restaurants to latlng for the frontend 
+   * google map marker use
+   *
+   * @param restaurants a set of restaurant objects
+   * @return a set of restaurant object with an extra "latlng" property that indicats
+   * its lattitude and longtitude
+   *
+   */
+  public function convertRestaurantAddressToCoord($restaurants) {
+    $converter = json_decode(file_get_contents($restaurant_address));
+    foreach($restaurants as &$rest) {
+      if(array_key_exists("address", $rest) && $rest["address"] != "FAIL" && array_key_exists($rest["name"], $converter)) {
+        $rest["latlng"] = $converter[$rest["name"]];
+      }
+    }
+  }
+
+  /**
+   * retrieve LARA Rating for a set of restaurants
+   *
+   * @param $restaurants a php array of restaurant objects
+   * @return a php array of <restaurant object, rating vector> pair
+   *
+   */
   public function retrieveRating($restaurants) {
     if($this -> restaurant_id_mapping_path == "NIL" || $this -> rating_path == "NIL") {
       return null;

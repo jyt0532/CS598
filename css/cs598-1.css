@@ -55,6 +55,9 @@ a:focus {
     text-decoration: none;
     color: #11505d;
 }
+.m_l{
+    margin-left: 6px;
+}
 .single_result{
     overflow: hidden;
 }

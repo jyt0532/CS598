@@ -1,6 +1,6 @@
 <?php
 function dot($v1, $v2) {
-  if(!is_array($v1) || !is_array(v2)) {
+  if(!is_array($v1) || !is_array($v2)) {
     echo "VECTOR ERROR(util.php): dot can only take vectors as input\n";
     return null;
   }

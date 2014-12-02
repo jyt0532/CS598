@@ -13,7 +13,7 @@ function dot($v1, $v2) {
   $len = count($v1);
   $ret = 0.0;
   for ($i = 0; $i < $len; $i ++) {
-    $ret = $ret + $v1[i] * $v2[i];
+    $ret = $ret + $v1[$i] * $v2[$i];
   }
 
   return $ret;

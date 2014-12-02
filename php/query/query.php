@@ -50,7 +50,7 @@ class Query {
    */
   public function getAllRestaurantWithCategory($categories = "NIL") {
     if($categories == null || $categories == "NIL" || count($categories) == 0) {
-      return $restaurants;
+      return $this -> restaurants;
     }
     $pairs = array();
 
@@ -85,12 +85,13 @@ class Query {
    *
    */
   public function convertRestaurantAddressToCoord($restaurants) {
-    $converter = json_decode(file_get_contents($restaurant_address));
+    $converter = json_decode(file_get_contents($this -> restaurant_address), true);
     foreach($restaurants as &$rest) {
       if(array_key_exists("address", $rest) && $rest["address"] != "FAIL" && array_key_exists($rest["name"], $converter)) {
         $rest["latlng"] = $converter[$rest["name"]];
       }
     }
+    return $restaurants;
   }
 
   /**

@@ -9,7 +9,7 @@ class Query {
 
   function __construct($category_path, $restaurant_index_path = null, $mapping_path = null, $rating_path = null) {
     if($restaurant_index_path != null) {
-      $this -> restaurants = json_decode(file_get_contents($restaurant_index_path), true);
+      $this -> restaurants = json_decode(file_get_contents($restaurant_index_path, true), true);
     }
     if($category_path != null) {
       $this -> categories = json_decode(file_get_contents($category_path), true);
@@ -43,14 +43,14 @@ class Query {
    * @return an array of restaurants
    */
   public function getAllRestaurantWithCategory($categories = "NIL") {
-    if(categories == "NIL") {
+    if($categories == null || $categories == "NIL" || count($categories) == 0) {
       return $restaurants;
     }
     $pairs = array();
 
     foreach($this -> restaurants as &$rest) {
       // some restaurants do not have category tags in yelp
-      if(!is_array($rest["category"])) {
+      if(!array_key_exists("category", $rest) || !is_array($rest["category"])) {
         continue;
       }
       $score = $this -> match($rest["category"], $categories);
@@ -69,7 +69,6 @@ class Query {
     return $ret;
   }
 
-
   public function retrieveRating($restaurants) {
     if($this -> restaurant_id_mapping_path == "NIL" || $this -> rating_path == "NIL") {
       return null;
@@ -81,9 +80,11 @@ class Query {
       $name = $rest["name"]; 
       if(array_key_exists($name, $mapping)) {
         $id = $mapping[$name];
-        $rate = $rating[$id];
-        $pair = new Pair($rest, $rate);
-        array_push($ret, $pair);
+        if(array_key_exists($id, $rating)) {
+          $rate = $rating[$id];
+          $pair = new Pair($rest, $rate);
+          array_push($ret, $pair);
+        }
       }
     }
 

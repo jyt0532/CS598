@@ -120,7 +120,7 @@ function search_button_click_action(){
         $('.page-header').hide();
         $('.select2-container').css('margin-left', '0px');
         $('#s2id_tags').css('width', '200px');
-        $('#main-nav').removeClass("navbar-custom navbar-fixed-top");
+        $('#main-nav').removeClass("navbar-fixed-top");
         
         var category = [];
         for(var i = 0; i < $('.select2-search-choice-close').length/2; i++){
@@ -141,8 +141,8 @@ function search_button_click_action(){
                 for(var i = 0; i < result.length; i++){
                     var restaurant_div = new_elem("div","" , "result"+i).addClass("row");
                     var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
-                    var result_middle = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-5");
-                    var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-5");
+                    var result_middle = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-4");
+                    var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
                     result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
                     result_middle.append(new_elem("div", "", "result"+ i + "_rating"));
                     result_right.append(new_elem("div", $('<span>' + result[i].first.address + '</span>').addClass('m_l'), "result"+ i + "_address"));

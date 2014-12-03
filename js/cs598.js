@@ -139,14 +139,22 @@ function search_button_click_action(){
             },
             function(result){
                 for(var i = 0; i < result.length; i++){
-                    var restaurant_div = new_elem("div","" , "result"+i).addClass("single-result");
-                    var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result");
-                    var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result");
-                    result_right.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
-                    result_right.append(new_elem("div", result[i].first.rating, "result"+ i + "_rating"));
+                    var restaurant_div = new_elem("div","" , "result"+i).addClass("row");
+                    var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
+                    var result_middle = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-5");
+                    var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-5");
+                    result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
+                    result_middle.append(new_elem("div", "", "result"+ i + "_rating"));
+                    result_right.append(new_elem("div", $('<span>' + result[i].first.address + '</span>').addClass('m_l'), "result"+ i + "_address"));
+                    result_right.append(new_elem("div", $('<span>' + result[i].first.phone + '</span>').addClass('m_l'), "result"+ i + "_phone"));
                     restaurant_div.append(result_left);
+                    restaurant_div.append(result_middle);
                     restaurant_div.append(result_right);
-                    $('.result-area').append(restaurant_div);
+                    $('#result-area').append(restaurant_div);
+                    $('#result-area').append($('<hr>'));
+                    $('#result'+ i +'_address').prepend($('<i class="fa fa-map-marker"></i>'));
+                    $('#result'+ i +'_phone').prepend($('<i class="fa fa-phone"></i>'));
+                    prepend_rating($('#result' + i + '_rating'), parseFloat(result[i].first.rating));
                 }
             },
             function(response){
@@ -159,6 +167,23 @@ function search_button_click_action(){
         //render_restaurant_result(result);
     });
 }
+function prepend_rating(elem, rating){
+    var num_of_full_star = parseInt(rating);
+    var num_of_half_star = 0;
+    if(parseInt(rating) != parseFloat(rating)){
+        num_of_half_star = 1;
+    }
+    var num_of_empty_star = 5 - num_of_full_star - num_of_half_star;
+    for(var i = 0; i < num_of_empty_star; i++){
+        elem.prepend($('<i class="fa fa-star-o"></i>'));
+    }
+    for(var i = 0; i < num_of_half_star; i++){
+        elem.prepend($('<i class="fa fa-star-half-empty"></i>'));
+    }
+    for(var i = 0; i < num_of_full_star; i++){
+        elem.prepend($('<i class="fa fa-star"></i>'));
+    }
+};
 function render_restaurant_result(result){
     for(var i = 0; i < result.length; i++){
         var restaurant_div = new_elem("div","" , "result"+i);

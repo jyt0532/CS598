@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <!-- google server googlemap API  -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization,places"></script>
+
+    <!-- local googlemap related manipulation js library -->
+    <script src="js/googlemap.js"></script>
+
+    <!-- script to LOAD googlemap-->
+    <script>
+      google.maps.event.addDomListener(window, 'load', initializeMap)
+    </script>
+
+    <!-- local css to beautify google map -->
+    <link rel="stylesheet" type="text/css" href="css/googlemap.css">
+
+  </head>
+
+  <body>
+    <div id="googleMap"></div>
+  </body>
+</html>

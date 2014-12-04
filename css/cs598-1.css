@@ -59,6 +59,11 @@ a:focus {
     text-decoration: none;
     color: #11505d;
 }
+#result-area{
+    overflow: scroll;
+    height: 600px;
+    width: 739px;
+}
 .m_l{
     margin-left: 6px;
 }

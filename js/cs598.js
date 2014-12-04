@@ -1,6 +1,7 @@
 $(document).ready(_init);
 var open_code_flag = 1;
 function _init() {
+    google.maps.event.addDomListener($('#search-btn')[0], 'click', initializeMap);
     $('#search-result').hide();
     show_aspects();
     search_button_click_action();
@@ -156,6 +157,7 @@ function search_button_click_action(){
                     $('#result'+ i +'_phone').prepend($('<i class="fa fa-phone"></i>'));
                     prepend_rating($('#result' + i + '_rating'), parseFloat(result[i].first.rating));
                 }
+                placeMarkers(result, map);
             },
             function(response){
                 alert("Get rating failure");

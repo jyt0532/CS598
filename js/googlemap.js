@@ -39,8 +39,10 @@ function parseLatlng(str) {
 function placeMarkers(restaurants, myMap) {
   for(var i = 0; i < restaurants.length; i ++) {
     // get lat lng tuple
-    var latlng = parseLatlng(restaurants[i].latlng)
-    var myMarker = new google.maps.Markder({
+    if(!("latlng" in restaurants[i].first)) continue
+    var latlng = parseLatlng(restaurants[i].first.latlng)
+    
+    var myMarker = new google.maps.Marker({
       position : new google.maps.LatLng(latlng[0], latlng[1])
     }) 
     

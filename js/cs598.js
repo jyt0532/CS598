@@ -67,10 +67,9 @@ function get_quota(elem){
     return parseInt(elem.next().text());
 }
 function reset_rating(cur_elem){
-    $(cur_elem).parent().children().removeClass('img-selected').addClass('img-not-selected'); 
+    $(cur_elem).parent().children().not('span').removeClass('img-selected').addClass('img-not-selected'); 
 }
 function get_total_used_quota(){
-    //AJAX!!
     result = ["Price", "Location" ,"Environment"];
     var total = 0;
     for(var i = 0; i < result.length; i++){

@@ -18,6 +18,7 @@
         <script src="js/grayscale.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization,places"></script>
         <script src="js/googlemap.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/googlemap.css">
 
         <!-- Custom CSS -->
 
@@ -137,7 +138,12 @@
                             <h2>Customized feature</h2>
                         </div>
                         <div class="input-area">
-                            <div><span>Quota remained: </span> <span id="quota_num">9</span></div>
+                            <div>
+                                <span>Quota remained: </span> 
+                                <span id="quota_num">9</span>
+                                <i id = "ex" class="fa fa-exclamation"></i>
+                                <span id="alert-msg">Remain quota cannot smaller than zero</span>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -206,7 +212,6 @@
         <link href="select2-3.5.2/select2.css" rel="stylesheet">
         <script src="js/cs598.js"></script>
         <link href="css/cs598-1.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="css/googlemap.css">
     </body>
 
 </html>

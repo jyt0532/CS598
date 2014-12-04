@@ -3,16 +3,18 @@ var open_code_flag = 1;
 function _init() {
     google.maps.event.addDomListener($('#search-btn')[0], 'click', initializeMap);
     $('#search-result').hide();
+    $('#ex').hide();
+    $('#alert-msg').hide();
     show_aspects();
     search_button_click_action();
     quota_control();
     get_catogories();
 
 
-    $('.select2-input').delegate("input", "click", function(){
+    /*$('.select2-input').delegate("input", "click", function(){
         $('.select2-input').css("height", "29px");    
         $('.select2-input').css("margin", "auto");    
-    })
+    })*/
 }
 function get_catogories(){
     ajax_call(
@@ -20,7 +22,9 @@ function get_catogories(){
         null,
         function(availableTags){
             append_tags_options(availableTags);
-            $("#tags").select2();
+            $("#tags").select2({
+                placeholder: "Select Categories"
+            });
        },
        function(response){
             alert("Get category failure");
@@ -42,8 +46,9 @@ function search_mode(){
     hide_all_div();
     $('#search_div').show();
 }
-function append_radios(new_div, num){
+function append_radios(new_div, result, num){
     var img_div = new_elem("div").attr("rating", 0).addClass("rating-div-" + num);
+    img_div.append(new_elem("span", result[num] + ": "));
     for(var i = 0; i < 5; i++){
         img_div.append($('<img>').addClass("img-not-selected rating-img").attr("num", i + 1));    
     }
@@ -51,27 +56,10 @@ function append_radios(new_div, num){
 }
 function show_aspects(){
     result = ["Price", "Location" ,"Environment"];
-    /*
-       ajax_call(
-       "",
-       null,
-       function(result){
-       for(var i=0; i < result.length; i++){
-
-       var new_div = new_elem("div", new_elem("span", result[i]));
-       append_radios(new_div);
-       $('#result_detail_div').append(new_div);
-       }
-       },
-       function(response){
-       alert("Get aspects failure");
-       },
-       "get"
-       );*/
     $('#result_detail_div').attr('num', result.length);
     for(var i=0; i < result.length; i++){
-        var new_div = new_elem("div", new_elem("span", result[i]));
-        append_radios(new_div, i);
+        var new_div = new_elem("div");
+        append_radios(new_div, result, i);
         $('.input-area').append(new_div);
     }
 }
@@ -96,6 +84,15 @@ function quota_control(){
             reset_rating(cur_elem);
             var rating = parseInt($(cur_elem).attr("num"));
             $(cur_elem).parent().attr("rating", rating);
+            if(get_total_used_quota() < 0){
+                $('#search-btn')[0].disabled = true;
+                $('#ex').show().css('color', 'red');
+                $('#quota_num').css('color', 'red');
+            }else{
+                $('#search-btn')[0].disabled = false;
+                $('#ex').hide();
+                $('#quota_num').css('color', 'black');
+            }
             $("#quota_num").text(get_total_used_quota());
             for(var i = 0 ; i < rating; i++){
                 $(cur_elem).removeClass('img-not-selected').addClass('img-selected');

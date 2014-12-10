@@ -62,7 +62,7 @@ a:focus {
 #result-area{
     overflow: scroll;
     height: 600px;
-    width: 739px;
+    width: 100%;
 }
 .m_l{
     margin-left: 6px;
@@ -402,6 +402,19 @@ body {
     margin: 0 0 20px;
 }
 
-#search-result {
-    padding-top: 15px;
+
+.search-result-left {
+    padding: 0px 0px 15px 0px;
+}
+
+.borderless_container {
+    width: 100%;
+    padding: 15px 0px 0px 15px;
+    margin: 0px 0px 0px 0px;
+}
+
+.result_area {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 20px;
 }

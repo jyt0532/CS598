@@ -1,5 +1,5 @@
 <?php
-include "../query/pair.php";
+//include "../query/pair.php";
 
 class Filter {
   public $dist = null;

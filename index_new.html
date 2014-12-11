@@ -19,6 +19,7 @@
         <script src="js/grayscale.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization,places"></script>
         <script src="js/googlemap.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/googlemap.css">
 
         <!-- Custom CSS -->
 
@@ -94,13 +95,29 @@
             </div>
         </div>
         </header>
-        <div id="search-result" class="container">
+        <div id="search-result" class="container borderless_container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 search-result-left">
                     <div class="new-input-area">
                     </div>    
+
+                    <div class = "search-result-slider">
+                    <div id="slider-range-min"></div>
+                    <div class = "row">
+                        <div class = "col-md-7">
+                            <span>Maximum distance:</span>
+                        </div>
+                        <div class = "col-md-5">
+                            <span id="distance">1000 meter</span>
+                        </div>
+                    </div>
+                    </div>
+
                     <div class="map-area" id="googleMap">
                     </div>
+                    <br>
+                    <br>
+                    
                 </div>
                 <div class="col-md-9">
                     <div id="result-area">
@@ -119,9 +136,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>About</h2>
-                <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
+                <p>FoodHero is a customized resteraunt search engine. </br> Our restaurant data and reviews was from 
+                <a href="http://startbootstrap.com/template-overviews/grayscale/">yelp.com</a>
+                .</p>
+                <p>Differnt user usually have different preferance about price, location and environment. Even a same user will not have same needs in different seaches. By using FoodHero, user can give differnt weights to each aspect based on their searching preferance.
+                </p>
+                
             </div>
         </div>
         </section>
@@ -130,7 +150,7 @@
         <!-- Search Section -->
         <section id="search" class="container content-section text-center">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-8 col-lg-offset-2 main-search">
                 <div class="result_area">
                     <div id="result_detail_div">
 
@@ -138,7 +158,11 @@
                             <h2>Customized feature</h2>
                         </div>
                         <div class="input-area">
-                            <div><span>Quota remained: </span> <span id="quota_num">9</span></div>
+                            <div id="quota-area">
+                                <span>Quota remained: </span> 
+                                <span id="quota_num">9</span>
+                                <i id = "ex" class="fa fa-exclamation"></i>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -180,13 +204,10 @@
         </div>
         </section>
 
-        <!-- Map Section -->
-        <div id="map"></div>
-
         <!-- Footer -->
         <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2014</p>
+            <p>Copyright &copy; FoodHero 2014</p>
         </div>
         </footer>
 

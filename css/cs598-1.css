@@ -59,6 +59,15 @@ a:focus {
     text-decoration: none;
     color: #11505d;
 }
+#slider-range-min{
+    width: 290px;
+    margin: 10px 0px 5px 0px;
+}
+#result-area{
+    overflow: scroll;
+    height: 600px;
+    width: 100%;
+}
 .m_l{
     margin-left: 6px;
 }
@@ -391,12 +400,37 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
+    overflow: scroll;
 }
 
 .page-header {
     margin: 0 0 20px;
 }
 
-#search-result {
-    padding-top: 15px;
+
+.search-result-left {
+    padding: 0px 0px 15px 0px;
+}
+
+.borderless_container {
+    width: 100%;
+    padding: 15px 0px 0px 15px;
+    margin: 0px 0px 0px 0px;
+}
+
+.result_area {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 20px;
+}
+
+.main-search {
+    margin-left: 385px;
+    width: 400px;
+}
+
+.search-result-slider {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
 }

@@ -61,6 +61,23 @@ a:focus {
     text-decoration: none;
     color: #11505d;
 }
+.circle {
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 40px; 
+    background-color: #693768;
+}
+.show-graph{                                                                                                                height: 500px;
+    width: 100%;
+    background-image: url(../img/color_wheel.png);
+    background-repeat:no-repeat;
+    background-size:  912px 400px;
+    background-position:center;
+}
 #slider-range-min{
     width: 290px;
     margin: 10px 0px 5px 0px;

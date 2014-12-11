@@ -19,7 +19,7 @@ function _init() {
       })*/
 }
 function send_location_request(position){
-    send_ajax_and_show_result(distance_filter, position.coords.latitude, position.coords.longitude);
+    send_ajax_and_show_result(distance_filter, position.coords.latitude.toString(), position.coords.longitude.toString());
 }
 function slider(){
     $( "#slider-range-min" ).slider({
@@ -151,6 +151,7 @@ function send_ajax_and_show_result(distance, lat, lng){
                 body_send
                 ,
             function(result){
+            $('#result-area').empty();
             for(var i = 0; i < result.length; i++){
                 var restaurant_div = new_elem("div","" , "result"+i).addClass("row");
                 var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");

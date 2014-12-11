@@ -4,9 +4,11 @@
 class Filter {
   public $dist = null;
   public $userLocation = null;
+  public $log = null;
   function __construct($dist, $userLocation) {
     $this -> dist = $dist;
     $this -> userLocation = $userLocation;
+    $this -> log = fopen("log.txt", "a+");
   }
 
   private function calc($lat, $lng) {
@@ -17,7 +19,8 @@ class Filter {
       echo "Google Map API Error.";
       return 0;
     }
-    $json_response = json_decode($response, true);
+    fwrite($this -> log, $response . "\n");
+    $json_response = json_decode(utf8_encode($response), true);
     $dist_meters = $json_response["rows"][0]["elements"][0]["distance"]["value"];
     echo $dist_meters . "\n";
     return $dist_meters;
@@ -43,4 +46,5 @@ class Filter {
     return $ret;
   }
 }
+
 ?>

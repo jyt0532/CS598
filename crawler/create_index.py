@@ -9,6 +9,8 @@ import time
 import random
 import json
 import time
+import unicodedata
+
 get_yelp_page = lambda zipcode, page_num: 'http://www.yelp.com/search?find_desc=Restaurants&find_loc={0}&ns=1&start={1}'.format(zipcode, page_num)
 
 def crawl_page(page_num): 
@@ -17,9 +19,9 @@ def crawl_page(page_num):
     soup = BeautifulSoup(urllib2.urlopen(page_url).read())
 
 #    restaurants = soup.findAll('div', attrs={'class':re.compile(r'^search-result natural-search-result')})
-    #restaurants = soup.findAll('div',{'class': 'search-result natural-searh-result biz-listing-large'})
-    restaurants = soup.findAll('div',{'class': 'search-result'})
+    restaurants = soup.findAll('div',{'class': 'natural-search-result'})
     arr = []
+
     for r in restaurants:
         dic = {}
 '''        price = r.find('span', {'class': 'price-range'}).string
@@ -28,6 +30,17 @@ def crawl_page(page_num):
         except:
             dic["price"] = 0;'''
         title = r.find('a', {'class':'biz-name'}) 
+
+        try:
+            dic["photo_url"] = r.find('img', {'class' :'photo-box-img'}).get('src')
+        except Exception, e:
+            dic["photo_url"] = "FAIL"
+
+        try:
+            dic["price"] = len(r.find('span', {'class':'price-range'}).string)
+        except Exception, e:
+            dic["price"] = 0
+
         try:
             dic["review_count"] = int(r.find('span', {'class':'review-count'}).get_text().split()[0])
         except Exception, e:
@@ -40,6 +53,7 @@ def crawl_page(page_num):
 
         try:
             dic["review_url"] = title.get('href')
+
         except Exception, e:
             dic["review_url"] = "FAIL"
 
@@ -92,5 +106,9 @@ def crawl_all_pages(num_of_pages):
     with open('output1.json', 'w') as outfile:
         json.dump(total_arr, outfile, indent=2)
 
+<<<<<<< HEAD
 crawl_all_pages(1)
+=======
+crawl_all_pages(36)
+>>>>>>> origin/master
 

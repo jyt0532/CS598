@@ -119,11 +119,10 @@ function quota_control(){
 function search_button_click_action(){
     $('#search-btn').click(function(){
             $('.intro').hide();
-            $('#search').hide();
             $('#about').hide();
-            $('#download').hide();
+            $('#search').hide();
             $('#contact').hide();
-            $('#map').hide();
+            
             $('#search-result').show();
             $('.result_area').clone(true).appendTo('.new-input-area');
             quota_control();

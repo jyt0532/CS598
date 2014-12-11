@@ -24,6 +24,11 @@ def crawl_page(page_num):
 
     for r in restaurants:
         dic = {}
+'''        price = r.find('span', {'class': 'price-range'}).string
+        try:
+            dic["price"] = price
+        except:
+            dic["price"] = 0;'''
         title = r.find('a', {'class':'biz-name'}) 
 
         try:
@@ -101,5 +106,9 @@ def crawl_all_pages(num_of_pages):
     with open('output1.json', 'w') as outfile:
         json.dump(total_arr, outfile, indent=2)
 
+<<<<<<< HEAD
+crawl_all_pages(1)
+=======
 crawl_all_pages(36)
+>>>>>>> origin/master
 

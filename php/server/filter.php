@@ -1,5 +1,5 @@
 <?php
-include "../query/pair.php";
+//include "../query/pair.php";
 
 class Filter {
   public $dist = null;
@@ -35,7 +35,7 @@ class Filter {
     $ret = array();
     foreach($restaurants as &$rest) {
        $ll = $this -> parse($rest -> first["latlng"]);
-       if($this -> calc($ll[0], $ll[1]) <= $dist) {
+       if($this -> calc($ll[0], $ll[1]) <= $this -> dist) {
          array_push($ret, $rest);
        }
     }

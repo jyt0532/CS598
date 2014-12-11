@@ -1,6 +1,7 @@
 <?php
   include '../query/query.php';
   include '../query/util.php';
+  include 'filter.php';
 
   $raw_category = $_POST["category"];
   $category = json_decode($raw_category);

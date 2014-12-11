@@ -29,6 +29,8 @@ function slider(){
         max: 3200,
         slide: function( event, ui ) {
             $( "#distance" ).text( ui.value + "meters");
+        },
+        stop: function( event, ui ) {
             if (navigator.geolocation) {
                 distance_filter = ui.value;
                 navigator.geolocation.getCurrentPosition(send_location_request);

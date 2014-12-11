@@ -17,10 +17,16 @@ def crawl_page(page_num):
     soup = BeautifulSoup(urllib2.urlopen(page_url).read())
 
 #    restaurants = soup.findAll('div', attrs={'class':re.compile(r'^search-result natural-search-result')})
+    #restaurants = soup.findAll('div',{'class': 'search-result natural-searh-result biz-listing-large'})
     restaurants = soup.findAll('div',{'class': 'search-result'})
     arr = []
     for r in restaurants:
         dic = {}
+'''        price = r.find('span', {'class': 'price-range'}).string
+        try:
+            dic["price"] = price
+        except:
+            dic["price"] = 0;'''
         title = r.find('a', {'class':'biz-name'}) 
         try:
             dic["review_count"] = int(r.find('span', {'class':'review-count'}).get_text().split()[0])
@@ -86,5 +92,5 @@ def crawl_all_pages(num_of_pages):
     with open('output1.json', 'w') as outfile:
         json.dump(total_arr, outfile, indent=2)
 
-crawl_all_pages(43)
+crawl_all_pages(1)
 

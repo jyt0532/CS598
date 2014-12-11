@@ -23,6 +23,16 @@
 
   $restaurants = $q -> getAllRestaurantWithCategory($category);
   $restaurants = $q -> convertRestaurantAddressToCoord($restaurants);
+
+  if(array_key_exists("distance", $_POST)) {
+    $userlat = $_POST["userlat"];
+    $userlng = $_POST["userlng"];
+    $dist = $_POST["distance"];
+    $userlocation = array("lat" => $userlat, "lng" => $userlng);
+    $filter = new Filter($dist, $userlocation); 
+    $restaurants = $filter -> filter($restaurants);
+  }
+
   $ratingPairs = $q -> retrieveRating($restaurants);
   foreach($ratingPairs as &$pair) {
     $pair -> second = dot($pair -> second, $preference);
@@ -30,6 +40,7 @@
 
   usort($ratingPairs, "Pair::cmp");
 
+ 
   echo json_encode($ratingPairs);
 
 ?>

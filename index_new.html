@@ -100,15 +100,24 @@
                 <div class="col-md-3 search-result-left">
                     <div class="new-input-area">
                     </div>    
-                    <br>
-                    <br>
+
+                    <div class = "search-result-slider">
+                    <div id="slider-range-min"></div>
+                    <div class = "row">
+                        <div class = "col-md-7">
+                            <span>Maximum distance:</span>
+                        </div>
+                        <div class = "col-md-5">
+                            <span id="distance">1000 meter</span>
+                        </div>
+                    </div>
+                    </div>
+
                     <div class="map-area" id="googleMap">
                     </div>
                     <br>
                     <br>
-                    <div id="slider-range-min"></div>
-                    <span>Maximum distance:</span>
-                    <span id="distance">1000 meter</span>
+                    
                 </div>
                 <div class="col-md-9">
                     <div id="result-area">
@@ -141,7 +150,7 @@
         <!-- Search Section -->
         <section id="search" class="container content-section text-center">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-8 col-lg-offset-2 main-search">
                 <div class="result_area">
                     <div id="result_detail_div">
 
@@ -195,13 +204,10 @@
         </div>
         </section>
 
-        <!-- Map Section -->
-        <div id="map"></div>
-
         <!-- Footer -->
         <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2014</p>
+            <p>Copyright &copy; FoodHero 2014</p>
         </div>
         </footer>
 

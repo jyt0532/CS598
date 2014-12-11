@@ -199,6 +199,10 @@ function search_button_click_action(){
 
             $('body').css('overflow', 'hidden');
             
+            var jump = $(this).attr('href');
+            var new_position = $('#'+jump).offset();
+            window.scrollTo(new_position.left,new_position.top);
+
 
             slider_exist = true;
             send_ajax_and_show_result();

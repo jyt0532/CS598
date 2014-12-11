@@ -161,10 +161,8 @@ function send_ajax_and_show_result(distance, lat, lng){
                 var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
                 var result_middle = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
-                var hide_btn = new_elem("button", "Hide", "hide-btn-"+i).addClass("btn btn-primary btn-smalli hide-btn").attr("num", i);
-                var show_btn = new_elem("button", "Show", "show-btn-"+i).addClass("btn btn-primary btn-small show-btn").attr("num", i);
-                var btn_div = new_elem("div", show_btn, "btn-div-"+i);
-                btn_div.append(hide_btn);
+                var show_and_hide_btn = new_elem("button", "Show", "show-btn-"+i).addClass("btn btn-primary btn-small show-hide-btn").attr("num", i).attr("status", 0);
+                var btn_div = new_elem("div", show_and_hide_btn, "btn-div-"+i);
                 result_left.append(btn_div);
                 result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
                 result_middle.append(new_elem("div", "", "result"+ i + "_rating"));
@@ -180,7 +178,7 @@ function send_ajax_and_show_result(distance, lat, lng){
                 $('#result'+ i +'_phone').prepend($('<i class="fa fa-phone"></i>'));
                 prepend_rating($('#result' + i + '_rating'), parseFloat(result[i].first.rating));
             }
-            hide_and_show_btn_clicked();
+            show_and_hide_btn_clicked();
             placeMarkers(result, map);
             },
     function(response){
@@ -190,13 +188,16 @@ function send_ajax_and_show_result(distance, lat, lng){
     );
 
 }
-function hide_and_show_btn_clicked(){
+function show_and_hide_btn_clicked(){
     $('.show-graph').hide();
-    $('.hide-btn').click(function(){
-        $("#graph-" + $(event.currentTarget).attr("num")).hide("fold", "slow");
-    });
-    $('.show-btn').click(function(){
-        $("#graph-" + $(event.currentTarget).attr("num")).show("fold", "1000");        
+    $('.show-hide-btn').click(function(){
+        if($(event.currentTarget).attr("status") == 0){
+            $("#graph-" + $(event.currentTarget).attr("num")).show("fold", "1000");        
+            $(event.currentTarget).attr("status", 1);
+        }else{
+            $("#graph-" + $(event.currentTarget).attr("num")).hide("fold", "slow");
+            $(event.currentTarget).attr("status", 0);
+        }
     });
 }
 function search_button_click_action(){

@@ -2,7 +2,11 @@
  * initialize google map, set necessary parameter to customize the map object
  *
  */
+var mine = null
 function initializeMap() {
+  navigator.geolocation.getCurrentPosition(function(position){
+     mine = position
+  });
   var mapProp = {
     center : new google.maps.LatLng(40.11094363, -88.22300514) ,
     zoom : 12 ,

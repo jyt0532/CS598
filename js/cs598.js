@@ -1,5 +1,6 @@
 $(document).ready(_init);
-var open_code_flag = 1;
+var slider_exist = false;
+var distance_filter = 0;
 function _init() {
     google.maps.event.addDomListener($('#search-btn')[0], 'click', initializeMap);
     $('#search-result').hide();
@@ -17,6 +18,9 @@ function _init() {
       $('.select2-input').css("margin", "auto");    
       })*/
 }
+function send_location_request(position){
+    send_ajax_and_show_result(distance_filter, position.coords.latitude, position.coords.longitude);
+}
 function slider(){
     $( "#slider-range-min" ).slider({
         range: "min",
@@ -25,6 +29,13 @@ function slider(){
         max: 3200,
         slide: function( event, ui ) {
             $( "#distance" ).text( ui.value + "meters");
+            if (navigator.geolocation) {
+                distance_filter = ui.value;
+                navigator.geolocation.getCurrentPosition(send_location_request);
+            }else{ 
+                alert("Geolocation is not supported by this browser.");
+                slider_exist = false;
+            }
         }
     });
     //$( "#distance" ).texr( "$" + $( "#slider-range-min" ).slider( "value" ) );
@@ -116,22 +127,7 @@ function quota_control(){
     });
 
 }
-function search_button_click_action(){
-    $('#search-btn').click(function(){
-            $('.intro').hide();
-            $('#about').hide();
-            $('#search').hide();
-            $('#contact').hide();
-            
-            $('#search-result').show();
-            $('.result_area').clone(true).appendTo('.new-input-area');
-            quota_control();
-            //get_catogories();
-            $('.page-header').hide();
-            $('.select2-container').css('margin-left', '0px');
-            $('#s2id_tags').css('width', '200px');
-            $('#main-nav').removeClass("navbar-fixed-top");
-
+function send_ajax_and_show_result(distance, lat, lng){
             var category = [];
             for(var i = 0; i < $('.select2-search-choice-close').length/2; i++){
             category.push($($('.select2-search-choice-close')[i]).prev().text());
@@ -140,13 +136,20 @@ function search_button_click_action(){
             for(var i = 0; i < 3; i++){
                 pref.push(parseInt($('.rating-div-' + i).attr("rating")));
             }
+            body_send = {
+                category: JSON.stringify(category),
+                preference: JSON.stringify(pref)
+            };
+            if(slider_exist){
+                body_send.distance = distance;
+                body_send.userlat = lat;
+                body_send.userlng = lng;
+            }
 
             ajax_call(
                 "php/server/ratings.php",
-                {
-                    category: JSON.stringify(category),
-                    preference: JSON.stringify(pref)
-                },
+                body_send
+                ,
             function(result){
             for(var i = 0; i < result.length; i++){
                 var restaurant_div = new_elem("div","" , "result"+i).addClass("row");
@@ -173,6 +176,26 @@ function search_button_click_action(){
     },
     "post"
     );
+
+}
+function search_button_click_action(){
+    $('#search-btn').click(function(){
+            $('.intro').hide();
+            $('#about').hide();
+            $('#search').hide();
+            $('#contact').hide();
+            
+            $('#search-result').show();
+            $('.result_area').clone(true).appendTo('.new-input-area');
+            quota_control();
+            //get_catogories();
+            $('.page-header').hide();
+            $('.select2-container').css('margin-left', '0px');
+            $('#s2id_tags').css('width', '200px');
+            $('#main-nav').removeClass("navbar-fixed-top");
+            slider_exist = true;
+
+            send_ajax_and_show_result();
 
     //var result = a = [{"name":"balckdog", "price":2}, {"name":"bankok", "price":"3"}];
     //render_restaurant_result(result);

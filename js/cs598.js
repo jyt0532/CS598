@@ -74,10 +74,12 @@ function append_radios(new_div, result, num){
     var img_div = new_elem("div").attr("rating", 0).addClass("rating-div-" + num);
     img_div.append(new_elem("span", result[num] + ": "));
     for(var i = 0; i < 5; i++){
-        img_div.append($('<img>').addClass("img-not-selected rating-img").attr("num", i + 1));    
+        img_div.append($('<i>').addClass("fa fa-star-o fa-2x rating-img star-not-selected").attr("num", i + 1));    
     }
     new_div.append(img_div);
 }
+
+
 function show_aspects(){
     result = ["Price", "Location" ,"Environment"];
     $('#result_detail_div').attr('num', result.length);
@@ -92,7 +94,7 @@ function get_quota(elem){
     return parseInt(elem.next().text());
 }
 function reset_rating(cur_elem){
-    $(cur_elem).parent().children().not('span').removeClass('img-selected').addClass('img-not-selected'); 
+    $(cur_elem).parent().children().not('span').removeClass('fa-star').addClass('fa-star-o star-not-selected'); 
 }
 function get_total_used_quota(){
     result = ["Price", "Location" ,"Environment"];
@@ -119,7 +121,7 @@ function quota_control(){
             }
             $("#quota_num").text(get_total_used_quota());
             for(var i = 0 ; i < rating; i++){
-            $(cur_elem).removeClass('img-not-selected').addClass('img-selected');
+            $(cur_elem).removeClass('fa-star-o star-not-selected').addClass('fa-star star-selected');
             var prev = cur_elem.previousSibling;
             cur_elem = prev;
             }
@@ -194,8 +196,15 @@ function search_button_click_action(){
             $('.select2-container').css('margin-left', '0px');
             $('#s2id_tags').css('width', '200px');
             $('#main-nav').removeClass("navbar-fixed-top");
-            slider_exist = true;
 
+            $('body').css('overflow', 'hidden');
+            
+            var jump = $(this).attr('href');
+            var new_position = $('#'+jump).offset();
+            window.scrollTo(new_position.left,new_position.top);
+
+
+            slider_exist = true;
             send_ajax_and_show_result();
 
     //var result = a = [{"name":"balckdog", "price":2}, {"name":"bankok", "price":"3"}];

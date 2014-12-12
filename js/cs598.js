@@ -210,6 +210,22 @@ function send_ajax_and_show_result(distance, lat, lng){
     "post"
     );
 }
+function draw_point(elem, x,y){
+    var middle = [593, 349];
+    var semi_major_axis = 329;
+    var semi_minor_axis = 138;
+
+    //var x = item["rnnValue"]*semi_major_axis + middle[0];
+    //var y = item["normalizedArousal"]*semi_minor_axis + middle[1];
+    var point = $("<div class=\"circle\"></div>");
+    //point.css("left", x.toString().concat("px"));
+    point.css("left", x+"px");
+    //point.css("top", y.toString().concat("px"));
+    point.css("top", y+"px");
+    //point.popover({title:'Tweet', content: item["tweetContent"], trigger:'hover', container: 'body'
+    //        ,delay: {show: 50, hide: 100}});
+    elem.append(point);
+}
 function create_category(category){
     var category_div = new_elem("div", "", "catogory" + i);
     for(var i = 0; i < category.length; i++){

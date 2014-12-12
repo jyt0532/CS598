@@ -77,7 +77,7 @@ a:focus {
 }
 .circle {
     display: block;
-    position: absolute;
+    position: relative;
     width: 15px;
     height: 15px;
     -webkit-border-radius: 25px;

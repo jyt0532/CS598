@@ -139,7 +139,7 @@ function send_ajax_and_show_result(distance, lat, lng){
             }
             var pref = [];
             for(var i = 0; i < 3; i++){
-                pref.push(parseInt($('.rating-div-' + i).attr("rating")));
+                pref.push(parseInt($('.rating-div-' + i).children().last().attr("rating")));
             }
             body_send = {
                 category: JSON.stringify(category),

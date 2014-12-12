@@ -1,6 +1,7 @@
 $(document).ready(_init);
 var slider_exist = false;
 var distance_filter = 0;
+var at_index_page = true;
 function _init() {
     google.maps.event.addDomListener($('#search-btn')[0], 'click', initializeMap);
     $('#search-result').hide();
@@ -169,6 +170,8 @@ function send_ajax_and_show_result(distance, lat, lng){
                 result_left.append($('<img src="http://s3-media4.fl.yelpcdn.com/bphoto/1ySM-LkkgbiyKSVuVi5MPQ/90s.jpg">').addClass('restaurant-img'));
                 result_left.append(btn_div);
                 result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
+                var category_div = create_category(result[i].first.category);
+                result_middle.append(category_div);
                 result_middle.append(new_elem("div", "", "result"+ i + "_rating"));
                 result_middle.append(new_elem("div", "", "result"+ i + "_price"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.address + '</span>').addClass('m_l'), "result"+ i + "_address"));
@@ -193,8 +196,14 @@ function send_ajax_and_show_result(distance, lat, lng){
     "post"
     );
 }
-
-
+function create_category(category){
+    var category_div = new_elem("div", "", "catogory" + i);
+    for(var i = 0; i < category.length; i++){
+        category_div.append($('<span>'+ category[i]+'</span>'));
+        category_div.append($('<span>&nbsp</span>'));
+    }
+    return category_div;
+}
 function clear_button_click_action(){
     $('#clear-btn').click(function(){
         var cur_elem = $('.input-area').children().first().next();
@@ -226,6 +235,7 @@ function show_and_hide_btn_clicked(){
 }
 function search_button_click_action(){
     $('#search-btn').click(function(){
+        if(at_index_page){
             $('.intro').hide();
             $('#about').hide();
             $('#search').hide();
@@ -249,9 +259,10 @@ function search_button_click_action(){
 
             slider_exist = true;
             send_ajax_and_show_result();
-
-    //var result = a = [{"name":"balckdog", "price":2}, {"name":"bankok", "price":"3"}];
-    //render_restaurant_result(result);
+            at_index_page = false;
+        }else{
+            send_ajax_and_show_result();
+        }
     });
 }
 function prepend_rating(elem, rating){

@@ -375,19 +375,6 @@ a:focus {
     transition: all .3s ease-in-out;
 }
 
-.btn-default {
-    border: 1px solid #219ab3;
-    color: #219ab3;
-    background-color: transparent;
-}
-
-.btn-default:hover,
-.btn-default:focus {
-    border: 1px solid #219ab3;
-    outline: 0;
-    color: #000;
-    background-color: #219ab3;
-}
 
 ul.banner-social-buttons {
     margin-top: 0;
@@ -497,4 +484,9 @@ img::-moz-selection {
 
 .padding-b-2 {
     padding-bottom: 2px;
+}
+
+.chart-btn {
+    width:70px;
+    height: 30px;
 }

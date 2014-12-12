@@ -159,13 +159,14 @@ function send_ajax_and_show_result(distance, lat, lng){
             for(var i = 0; i < result.length; i++){
                 var restaurant_div = new_elem("div","" , "result"+i).addClass("row");
                 var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
-                var result_middle = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-4");
+                var result_middle = new_elem("div", "", "result"+i+"_middle").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
                 var show_and_hide_btn = new_elem("button", "Show", "show-btn-"+i).addClass("btn btn-primary btn-small show-hide-btn").attr("num", i).attr("status", 0);
                 var btn_div = new_elem("div", show_and_hide_btn, "btn-div-"+i);
                 result_left.append(btn_div);
                 result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
                 result_middle.append(new_elem("div", "", "result"+ i + "_rating"));
+                result_middle.append(new_elem("div", "", "result"+ i + "_price"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.address + '</span>').addClass('m_l'), "result"+ i + "_address"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.phone + '</span>').addClass('m_l'), "result"+ i + "_phone"));
                 restaurant_div.append(result_left);
@@ -177,6 +178,7 @@ function send_ajax_and_show_result(distance, lat, lng){
                 $('#result'+ i +'_address').prepend($('<i class="fa fa-map-marker"></i>'));
                 $('#result'+ i +'_phone').prepend($('<i class="fa fa-phone"></i>'));
                 prepend_rating($('#result' + i + '_rating'), parseFloat(result[i].first.rating));
+                append_dollar_sign($('#result' + i + '_price'), result[i].first.price);
             }
             show_and_hide_btn_clicked();
             placeMarkers(result, map);
@@ -187,6 +189,12 @@ function send_ajax_and_show_result(distance, lat, lng){
     "post"
     );
 
+}
+function append_dollar_sign(elem, price){
+    price = 2;
+    for(var i = 0; i < price; i++){
+        elem.append($('<i class="fa fa-usd"></i>'));
+    }
 }
 function show_and_hide_btn_clicked(){
     $('.show-graph').hide();

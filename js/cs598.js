@@ -1,6 +1,7 @@
 $(document).ready(_init);
 var slider_exist = false;
 var distance_filter = 0;
+var at_index_page = true;
 function _init() {
     google.maps.event.addDomListener($('#search-btn')[0], 'click', initializeMap);
     $('#search-result').hide();
@@ -30,6 +31,8 @@ function slider(){
         max: 3200,
         slide: function( event, ui ) {
             $( "#distance" ).text( ui.value + "meters");
+        },
+        stop: function( event, ui ) {
             if (navigator.geolocation) {
                 distance_filter = ui.value;
                 navigator.geolocation.getCurrentPosition(send_location_request);
@@ -83,7 +86,7 @@ function append_radios(new_div, result, num){
 
 
 function show_aspects(){
-    result = ["Price", "Location" ,"Environment"];
+    result = ["Price", "Taste" ,"Environment"];
     $('#result_detail_div').attr('num', result.length);
     for(var i=0; i < result.length; i++){
         var new_div = new_elem("div");
@@ -139,7 +142,7 @@ function send_ajax_and_show_result(distance, lat, lng){
             }
             var pref = [];
             for(var i = 0; i < 3; i++){
-                pref.push(parseInt($('.rating-div-' + i).attr("rating")));
+                pref.push(parseInt($('.rating-div-' + i).children().last().attr("rating")));
             }
             body_send = {
                 category: JSON.stringify(category),
@@ -160,21 +163,35 @@ function send_ajax_and_show_result(distance, lat, lng){
             for(var i = 0; i < result.length; i++){
                 var restaurant_div = new_elem("div","" , "result"+i).addClass("row");
                 var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
-                var result_middle = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-4");
+                var result_middle = new_elem("div", "", "result"+i+"_middle").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
+                var show_and_hide_btn = new_elem("button", "Show", "show-btn-"+i).addClass("btn btn-primary btn-small show-hide-btn").attr("num", i).attr("status", 0);
+                var btn_div = new_elem("div", show_and_hide_btn, "btn-div-"+i).addClass('btn-div');
+                if(typeof result[i].first.photo != 'undefined'){
+                    result_left.append($('<img src="http:'+ result[i].first.photo+'">').addClass('restaurant-img'));
+                }else{
+                    result_left.append($('<img src="http://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/5f69f303f17c/assets/img/default_avatars/business_medium_square.png">').addClass('restaurant-img'));
+                }
+                result_left.append(btn_div);
                 result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
+                var category_div = create_category(result[i].first.category);
+                result_middle.append(category_div);
                 result_middle.append(new_elem("div", "", "result"+ i + "_rating"));
+                result_middle.append(new_elem("div", "", "result"+ i + "_price"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.address + '</span>').addClass('m_l'), "result"+ i + "_address"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.phone + '</span>').addClass('m_l'), "result"+ i + "_phone"));
                 restaurant_div.append(result_left);
                 restaurant_div.append(result_middle);
                 restaurant_div.append(result_right);
+                restaurant_div.append(new_elem("div","", "graph-"+i).addClass("show-graph"));
                 $('#result-area').append(restaurant_div);
                 $('#result-area').append($('<hr>'));
                 $('#result'+ i +'_address').prepend($('<i class="fa fa-map-marker"></i>'));
                 $('#result'+ i +'_phone').prepend($('<i class="fa fa-phone"></i>'));
                 prepend_rating($('#result' + i + '_rating'), parseFloat(result[i].first.rating));
+                append_dollar_sign($('#result' + i + '_price'), result[i].first.price);
             }
+            show_and_hide_btn_clicked();
             placeMarkers(result, map);
             },
     function(response){
@@ -183,8 +200,14 @@ function send_ajax_and_show_result(distance, lat, lng){
     "post"
     );
 }
-
-
+function create_category(category){
+    var category_div = new_elem("div", "", "catogory" + i);
+    for(var i = 0; i < category.length; i++){
+        category_div.append($('<span>'+ category[i]+'</span>'));
+        category_div.append($('<span>&nbsp</span>'));
+    }
+    return category_div;
+}
 function clear_button_click_action(){
     $('#clear-btn').click(function(){
         var cur_elem = $('.input-area').children().first().next();
@@ -196,19 +219,34 @@ function clear_button_click_action(){
         }
     });
 }
-
-
+function append_dollar_sign(elem, price){
+    for(var i = 0; i < price; i++){
+        elem.append($('<i class="fa fa-usd"></i>'));
+    }
+}
+function show_and_hide_btn_clicked(){
+    $('.show-graph').hide();
+    $('.show-hide-btn').click(function(){
+        if($(event.currentTarget).attr("status") == 0){
+            $("#graph-" + $(event.currentTarget).attr("num")).show("fold", "1000");        
+            $(event.currentTarget).attr("status", 1);
+        }else{
+            $("#graph-" + $(event.currentTarget).attr("num")).hide("fold", "slow");
+            $(event.currentTarget).attr("status", 0);
+        }
+    });
+}
 function search_button_click_action(){
     $('#search-btn').click(function(){
+        if(at_index_page){
             $('.intro').hide();
             $('#about').hide();
             $('#search').hide();
             $('#contact').hide();
             
             $('#search-result').show();
-            $('.result_area').clone(true).appendTo('.new-input-area');
+            $('.result_area').appendTo('.new-input-area');
             quota_control();
-            //get_catogories();
             $('.page-header').hide();
             $('.select2-container').css('margin-left', '0px');
             $('#s2id_tags').css('width', '200px');
@@ -223,9 +261,10 @@ function search_button_click_action(){
 
             slider_exist = true;
             send_ajax_and_show_result();
-
-    //var result = a = [{"name":"balckdog", "price":2}, {"name":"bankok", "price":"3"}];
-    //render_restaurant_result(result);
+            at_index_page = false;
+        }else{
+            send_ajax_and_show_result();
+        }
     });
 }
 function prepend_rating(elem, rating){

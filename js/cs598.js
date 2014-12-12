@@ -163,7 +163,8 @@ function send_ajax_and_show_result(distance, lat, lng){
             for(var i = 0; i < result.length; i++){
                 var restaurant_div = new_elem("div", "", "result"+i).addClass("row");
                 var result_top = new_elem("div", "", "result-top-"+i).addClass("result-top");
-                var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
+                //var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
+                var result_left = new_elem("div", new_elem("span", result[i].second), "result"+i+"_left").addClass("left-result col-md-2");
                 var result_middle = new_elem("div", "", "result"+i+"_middle").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
                 var show_and_hide_btn = new_elem("button", new_elem("span", "Show", "show-btn-text-"+i), "show-btn-"+i).addClass("btn btn-default btn-sm chart-btn show-hide-btn").attr("num", i).attr("status", 0).prepend(new_elem('i').addClass('fa fa-bar-chart'));

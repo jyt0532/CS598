@@ -8,6 +8,7 @@ function _init() {
     $('#alert-msg').hide();
     show_aspects();
     search_button_click_action();
+    clear_button_click_action();
     quota_control();
     get_catogories();
     slider();
@@ -71,10 +72,11 @@ function search_mode(){
     $('#search_div').show();
 }
 function append_radios(new_div, result, num){
-    var img_div = new_elem("div").attr("rating", 0).addClass("rating-div-" + num);
-    img_div.append(new_elem("span", result[num] + ": "));
+    var img_div = new_elem("div").addClass("rating-div-" + num).addClass("row");
+    img_div.append(new_elem("div").addClass("col-md-5 text-align-left").append(new_elem("span", result[num] + ": ")));
+    img_div.append(new_elem("div").attr("rating", 0).addClass("col-md-7"));
     for(var i = 0; i < 5; i++){
-        img_div.append($('<i>').addClass("fa fa-star-o fa-2x rating-img star-not-selected").attr("num", i + 1));    
+        img_div.children().last().append($('<i>').addClass("fa fa-2x rating-img fa-star-o star-not-selected").attr("num", i + 1));    
     }
     new_div.append(img_div);
 }
@@ -94,13 +96,14 @@ function get_quota(elem){
     return parseInt(elem.next().text());
 }
 function reset_rating(cur_elem){
-    $(cur_elem).parent().children().not('span').removeClass('fa-star').addClass('fa-star-o star-not-selected'); 
+    $(cur_elem).parent().children().removeClass('fa-star star-selected').addClass('fa-star-o star-not-selected'); 
 }
 function get_total_used_quota(){
     result = ["Price", "Location" ,"Environment"];
     var total = 0;
     for(var i = 0; i < result.length; i++){
-        total += parseInt($(".rating-div-"+i).attr("rating"));
+
+        total += parseInt($($(".rating-div-"+i)[0]).children().last().attr("rating"));
     }
     return 9-total;
 }
@@ -179,8 +182,22 @@ function send_ajax_and_show_result(distance, lat, lng){
     },
     "post"
     );
-
 }
+
+
+function clear_button_click_action(){
+    $('#clear-btn').click(function(){
+        var cur_elem = $('.input-area').children().first().next();
+        for(var i = 0; i < $('.input-area').children().size() - 1; i++){
+            reset_rating($(cur_elem.children().children()[1]).children()[0]);
+            $(cur_elem.children().children()[1]).attr('rating',0);
+            $("#quota_num").text(9);
+            cur_elem = cur_elem.next();
+        }
+    });
+}
+
+
 function search_button_click_action(){
     $('#search-btn').click(function(){
             $('.intro').hide();

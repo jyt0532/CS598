@@ -61,6 +61,13 @@ a:focus {
     text-decoration: none;
     color: #11505d;
 }
+.restaurant-img{
+    margin-left: 17px;
+}
+.btn-div{
+    margin-top: 10px;
+    margin-left: 34px;
+}
 .circle {
     display: block;
     position: absolute;

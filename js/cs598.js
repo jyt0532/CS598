@@ -162,7 +162,8 @@ function send_ajax_and_show_result(distance, lat, lng){
                 var result_middle = new_elem("div", "", "result"+i+"_middle").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
                 var show_and_hide_btn = new_elem("button", "Show", "show-btn-"+i).addClass("btn btn-primary btn-small show-hide-btn").attr("num", i).attr("status", 0);
-                var btn_div = new_elem("div", show_and_hide_btn, "btn-div-"+i);
+                var btn_div = new_elem("div", show_and_hide_btn, "btn-div-"+i).addClass('btn-div');
+                result_left.append($('<img src="http://s3-media4.fl.yelpcdn.com/bphoto/1ySM-LkkgbiyKSVuVi5MPQ/90s.jpg">').addClass('restaurant-img'));
                 result_left.append(btn_div);
                 result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
                 result_middle.append(new_elem("div", "", "result"+ i + "_rating"));

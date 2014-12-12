@@ -66,6 +66,7 @@ a:focus {
 }
 .result-bot{
     margin-left: 20px;
+    overflow: hidden;
 }
 .restaurant-img{
     margin-left: 17px;

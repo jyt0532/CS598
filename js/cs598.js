@@ -200,6 +200,7 @@ function send_ajax_and_show_result(distance, lat, lng){
                 prepend_rating($('#result' + i + '_rating'), parseFloat(result[i].first.rating));
                 append_dollar_sign($('#result' + i + '_price'), result[i].first.price);
             }
+            $('.result-bot').hide();
             show_and_hide_btn_clicked();
             placeMarkers(result, map);
             },
@@ -234,14 +235,13 @@ function append_dollar_sign(elem, price){
     }
 }
 function show_and_hide_btn_clicked(){
-    $('.result-bot').hide();
     $('.show-hide-btn').click(function(){
         if($(event.currentTarget).attr("status") == 0){
-            $("#result-bot-" + $(event.currentTarget).attr("num")).show("fold", "1000");        
+            $("#result-bot-" + $(event.currentTarget).attr("num")).show("fold", "10");        
             $(event.currentTarget).attr("status", 1);
             $(event.currentTarget).text("Hide");
         }else{
-            $("#result-bot-" + $(event.currentTarget).attr("num")).hide("fold", "slow");
+            $("#result-bot-" + $(event.currentTarget).attr("num")).hide("fold", "fast");
             $(event.currentTarget).attr("status", 0);
             $(event.currentTarget).text("Show")
         }

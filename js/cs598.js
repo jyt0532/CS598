@@ -102,7 +102,7 @@ function reset_rating(cur_elem){
     $(cur_elem).parent().children().removeClass('fa-star star-selected').addClass('fa-star-o star-not-selected'); 
 }
 function get_total_used_quota(){
-    result = ["Price", "Location" ,"Environment"];
+    result = ["Price", "Taste" ,"Environment"];
     var total = 0;
     for(var i = 0; i < result.length; i++){
 
@@ -159,13 +159,14 @@ function send_ajax_and_show_result(distance, lat, lng){
                 body_send
                 ,
             function(result){
-            $('#result-area').empty();
+            $('#result-inner-area').empty();
             for(var i = 0; i < result.length; i++){
-                var restaurant_div = new_elem("div","" , "result"+i).addClass("row");
+                var restaurant_div = new_elem("div", "", "result"+i).addClass("row");
+                var result_top = new_elem("div", "", "result-top-"+i).addClass("result-top");
                 var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
                 var result_middle = new_elem("div", "", "result"+i+"_middle").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
-                var show_and_hide_btn = new_elem("button", "Show", "show-btn-"+i).addClass("btn btn-primary btn-small show-hide-btn").attr("num", i).attr("status", 0);
+                var show_and_hide_btn = new_elem("button", new_elem("span", "Show", "show-btn-text-"+i), "show-btn-"+i).addClass("btn btn-default btn-sm chart-btn show-hide-btn").attr("num", i).attr("status", 0).prepend(new_elem('i').addClass('fa fa-bar-chart'));
                 var btn_div = new_elem("div", show_and_hide_btn, "btn-div-"+i).addClass('btn-div');
                 if(typeof result[i].first.photo != 'undefined'){
                     result_left.append($('<img src="http:'+ result[i].first.photo+'">').addClass('restaurant-img'));
@@ -180,17 +181,26 @@ function send_ajax_and_show_result(distance, lat, lng){
                 result_middle.append(new_elem("div", "", "result"+ i + "_price"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.address + '</span>').addClass('m_l'), "result"+ i + "_address"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.phone + '</span>').addClass('m_l'), "result"+ i + "_phone"));
-                restaurant_div.append(result_left);
-                restaurant_div.append(result_middle);
-                restaurant_div.append(result_right);
-                restaurant_div.append(new_elem("div","", "graph-"+i).addClass("show-graph"));
-                $('#result-area').append(restaurant_div);
-                $('#result-area').append($('<hr>'));
+                result_top.append(result_left);
+                result_top.append(result_middle);
+                result_top.append(result_right);
+                restaurant_div.append(result_top);
+                var result_bot = new_elem("div", "", "result-bot-"+i).addClass("result-bot");
+                var graph_btn = new_elem("div","", "graph-btn"+i).addClass("show-graph-btn");
+                graph_btn.append(new_elem("div", new_elem("button", "Price", "btn-price-"+i).addClass('btn-link')));
+                graph_btn.append(new_elem("div", new_elem("button", "Taste", "btn-taste-"+i).addClass('btn-link')));
+                graph_btn.append(new_elem("div", new_elem("button", "Environment", "btn-environment-"+i).addClass('btn-link')));
+                result_bot.append(graph_btn);
+                result_bot.append(new_elem("div","", "graph-"+i).addClass("show-graph"));
+                restaurant_div.append(result_bot);
+                $('#result-inner-area').append(restaurant_div);
+                $('#result-inner-area').append($('<hr>'));
                 $('#result'+ i +'_address').prepend($('<i class="fa fa-map-marker"></i>'));
                 $('#result'+ i +'_phone').prepend($('<i class="fa fa-phone"></i>'));
                 prepend_rating($('#result' + i + '_rating'), parseFloat(result[i].first.rating));
                 append_dollar_sign($('#result' + i + '_price'), result[i].first.price);
             }
+            $('.result-bot').hide();
             show_and_hide_btn_clicked();
             placeMarkers(result, map);
             },
@@ -199,6 +209,22 @@ function send_ajax_and_show_result(distance, lat, lng){
     },
     "post"
     );
+}
+function draw_point(elem, x,y){
+    var middle = [593, 349];
+    var semi_major_axis = 329;
+    var semi_minor_axis = 138;
+
+    //var x = item["rnnValue"]*semi_major_axis + middle[0];
+    //var y = item["normalizedArousal"]*semi_minor_axis + middle[1];
+    var point = $("<div class=\"circle\"></div>");
+    //point.css("left", x.toString().concat("px"));
+    point.css("left", x+"px");
+    //point.css("top", y.toString().concat("px"));
+    point.css("top", y+"px");
+    //point.popover({title:'Tweet', content: item["tweetContent"], trigger:'hover', container: 'body'
+    //        ,delay: {show: 50, hide: 100}});
+    elem.append(point);
 }
 function create_category(category){
     var category_div = new_elem("div", "", "catogory" + i);
@@ -225,14 +251,15 @@ function append_dollar_sign(elem, price){
     }
 }
 function show_and_hide_btn_clicked(){
-    $('.show-graph').hide();
     $('.show-hide-btn').click(function(){
         if($(event.currentTarget).attr("status") == 0){
-            $("#graph-" + $(event.currentTarget).attr("num")).show("fold", "1000");        
+            $("#result-bot-" + $(event.currentTarget).attr("num")).show("fold", "10");        
             $(event.currentTarget).attr("status", 1);
+            $("#show-btn-text-" + $(event.currentTarget).attr("num")).text("Hide");
         }else{
-            $("#graph-" + $(event.currentTarget).attr("num")).hide("fold", "slow");
+            $("#result-bot-" + $(event.currentTarget).attr("num")).hide("fold", "fast");
             $(event.currentTarget).attr("status", 0);
+            $("#show-btn-text-" + $(event.currentTarget).attr("num")).text("Show");
         }
     });
 }

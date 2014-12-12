@@ -61,6 +61,12 @@ a:focus {
     text-decoration: none;
     color: #11505d;
 }
+.result-top{
+    overflow: hidden;
+}
+.result-bot{
+    margin-left: 20px;
+}
 .restaurant-img{
     margin-left: 17px;
 }
@@ -85,6 +91,13 @@ a:focus {
     background-repeat:no-repeat;
     background-size:  contain;
     background-position:center;
+    float: left;
+    margin-left: 55px;
+}
+.show-graph-btn{
+    width: 110px;
+    float: left;
+    margin-left: 10px;
 }
 #slider-range-min{
     width: 290px;

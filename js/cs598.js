@@ -102,7 +102,7 @@ function reset_rating(cur_elem){
     $(cur_elem).parent().children().removeClass('fa-star star-selected').addClass('fa-star-o star-not-selected'); 
 }
 function get_total_used_quota(){
-    result = ["Price", "Location" ,"Environment"];
+    result = ["Price", "Taste" ,"Environment"];
     var total = 0;
     for(var i = 0; i < result.length; i++){
 
@@ -161,7 +161,8 @@ function send_ajax_and_show_result(distance, lat, lng){
             function(result){
             $('#result-area').empty();
             for(var i = 0; i < result.length; i++){
-                var restaurant_div = new_elem("div","" , "result"+i).addClass("row");
+                var restaurant_div = new_elem("div", "", "result"+i).addClass("row");
+                var result_top = new_elem("div", "", "result-top-"+i).addClass("result-top");
                 var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
                 var result_middle = new_elem("div", "", "result"+i+"_middle").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
@@ -180,10 +181,18 @@ function send_ajax_and_show_result(distance, lat, lng){
                 result_middle.append(new_elem("div", "", "result"+ i + "_price"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.address + '</span>').addClass('m_l'), "result"+ i + "_address"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.phone + '</span>').addClass('m_l'), "result"+ i + "_phone"));
-                restaurant_div.append(result_left);
-                restaurant_div.append(result_middle);
-                restaurant_div.append(result_right);
-                restaurant_div.append(new_elem("div","", "graph-"+i).addClass("show-graph"));
+                result_top.append(result_left);
+                result_top.append(result_middle);
+                result_top.append(result_right);
+                restaurant_div.append(result_top);
+                var result_bot = new_elem("div", "", "result-bot-"+i).addClass("result-bot");
+                var graph_btn = new_elem("div","", "graph-btn"+i).addClass("show-graph-btn");
+                graph_btn.append(new_elem("div", new_elem("button", "Price", "btn-price-"+i).addClass('btn-link')));
+                graph_btn.append(new_elem("div", new_elem("button", "Taste", "btn-taste-"+i).addClass('btn-link')));
+                graph_btn.append(new_elem("div", new_elem("button", "Environment", "btn-environment-"+i).addClass('btn-link')));
+                result_bot.append(graph_btn);
+                result_bot.append(new_elem("div","", "graph-"+i).addClass("show-graph"));
+                restaurant_div.append(result_bot);
                 $('#result-area').append(restaurant_div);
                 $('#result-area').append($('<hr>'));
                 $('#result'+ i +'_address').prepend($('<i class="fa fa-map-marker"></i>'));
@@ -225,14 +234,16 @@ function append_dollar_sign(elem, price){
     }
 }
 function show_and_hide_btn_clicked(){
-    $('.show-graph').hide();
+    $('.result-bot').hide();
     $('.show-hide-btn').click(function(){
         if($(event.currentTarget).attr("status") == 0){
-            $("#graph-" + $(event.currentTarget).attr("num")).show("fold", "1000");        
+            $("#result-bot-" + $(event.currentTarget).attr("num")).show("fold", "1000");        
             $(event.currentTarget).attr("status", 1);
+            $(event.currentTarget).text("Hide");
         }else{
-            $("#graph-" + $(event.currentTarget).attr("num")).hide("fold", "slow");
+            $("#result-bot-" + $(event.currentTarget).attr("num")).hide("fold", "slow");
             $(event.currentTarget).attr("status", 0);
+            $(event.currentTarget).text("Show")
         }
     });
 }

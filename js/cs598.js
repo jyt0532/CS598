@@ -164,24 +164,24 @@ function send_ajax_and_show_result(distance, lat, lng){
                 var restaurant_div = new_elem("div", "", "result"+i).addClass("row");
                 var result_top = new_elem("div", "", "result-top-"+i).addClass("result-top");
                 var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
-                //var result_left = new_elem("div", new_elem("span", result[i].second), "result"+i+"_left").addClass("left-result col-md-2");
                 var result_middle = new_elem("div", "", "result"+i+"_middle").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
-                var show_and_hide_btn = new_elem("button", new_elem("span", "Show", "show-btn-text-"+i), "show-btn-"+i).addClass("btn btn-default btn-sm chart-btn show-hide-btn").attr("num", i).attr("status", 0).prepend(new_elem('i').addClass('fa fa-bar-chart'));
+                var show_and_hide_btn = new_elem("button", new_elem("span", "Show", "show-btn-text-"+i), "show-btn-"+i).addClass("btn btn-default btn-sm chart-btn show-hide-btn").attr("num", i).attr("status", 0).prepend(new_elem('i').addClass('fa fa-bar-chart icon-padding'));
                 var btn_div = new_elem("div", show_and_hide_btn, "btn-div-"+i).addClass('btn-div');
                 if(typeof result[i].first.photo != 'undefined'){
                     result_left.append($('<img src="http:'+ result[i].first.photo+'">').addClass('restaurant-img'));
                 }else{
                     result_left.append($('<img src="http://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/5f69f303f17c/assets/img/default_avatars/business_medium_square.png">').addClass('restaurant-img'));
                 }
-                result_left.append(btn_div);
-                result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
+                //result_left.append(btn_div);
+                result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name").prepend(new_elem("span",i+1).addClass("rank-number")));
                 var category_div = create_category(result[i].first.category);
                 result_middle.append(category_div);
                 result_middle.append(new_elem("div", "", "result"+ i + "_rating"));
                 result_middle.append(new_elem("div", "", "result"+ i + "_price"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.address + '</span>').addClass('m_l'), "result"+ i + "_address"));
                 result_right.append(new_elem("div", $('<span>' + result[i].first.phone + '</span>').addClass('m_l'), "result"+ i + "_phone"));
+                result_right.append(btn_div);
                 result_top.append(result_left);
                 result_top.append(result_middle);
                 result_top.append(result_right);
@@ -275,13 +275,22 @@ function append_dollar_sign(elem, price){
 function show_and_hide_btn_clicked(){
     $('.show-hide-btn').click(function(){
         if($(event.currentTarget).attr("status") == 0){
+            var open = $("button[status='1']");
+            for (var i = 0; i < open.size(); i++) {
+                $("#result-bot-" + $(open[i]).attr("num")).hide("fold", "fast");
+                $(open[i]).attr("status", 0);
+                $("#show-btn-text-" + $(open[i]).attr("num")).text("Show");
+            }
+            $('#result-area').animate({scrollTop:$(event.currentTarget).attr("num") * 140}, '500');
             $("#result-bot-" + $(event.currentTarget).attr("num")).show("fold", "10");        
             $(event.currentTarget).attr("status", 1);
             $("#show-btn-text-" + $(event.currentTarget).attr("num")).text("Hide");
+            
         }else{
             $("#result-bot-" + $(event.currentTarget).attr("num")).hide("fold", "fast");
             $(event.currentTarget).attr("status", 0);
             $("#show-btn-text-" + $(event.currentTarget).attr("num")).text("Show");
+
         }
     });
 }

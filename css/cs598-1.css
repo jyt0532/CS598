@@ -65,15 +65,22 @@ a:focus {
     overflow: hidden;
 }
 .result-bot{
-    margin-left: 20px;
+    margin-left: 25px;
+    margin-top: 20px; 
     overflow: hidden;
 }
 .restaurant-img{
     margin-left: 17px;
+    border-radius: 30px;
+    width: 100px;
 }
 .btn-div{
-    margin-top: 10px;
-    margin-left: 34px;
+    margin-top: 14px;
+    margin-left: 0px;
+}
+
+.btn-link {
+    height: 23px;
 }
 .circle {
     display: block;
@@ -93,7 +100,7 @@ a:focus {
     background-size:  contain;
     background-position:center;
     float: left;
-    margin-left: 35px;
+    margin-left: 17px;
 }
 .show-graph-btn{
     width: 110px;
@@ -497,6 +504,16 @@ img::-moz-selection {
 }
 
 .chart-btn {
-    width:70px;
+    width: 280px;
     height: 30px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.rank-number {
+    letter-spacing: 10px;
+}
+
+.icon-padding {
+    padding-right: 2px;
 }

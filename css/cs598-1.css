@@ -78,11 +78,12 @@ a:focus {
     border-radius: 40px; 
     background-color: #693768;
 }
-.show-graph{                                                                                                                height: 500px;
-    width: 100%;
-    background-image: url(../img/color_wheel.png);
+.show-graph{                                                                                                                
+    height: 225px;
+    width: 600px;
+    background-image: url(../img/graph.jpg);
     background-repeat:no-repeat;
-    background-size:  912px 400px;
+    background-size:  contain;
     background-position:center;
 }
 #slider-range-min{

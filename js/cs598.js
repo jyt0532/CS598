@@ -167,7 +167,11 @@ function send_ajax_and_show_result(distance, lat, lng){
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
                 var show_and_hide_btn = new_elem("button", "Show", "show-btn-"+i).addClass("btn btn-primary btn-small show-hide-btn").attr("num", i).attr("status", 0);
                 var btn_div = new_elem("div", show_and_hide_btn, "btn-div-"+i).addClass('btn-div');
-                result_left.append($('<img src="http://s3-media4.fl.yelpcdn.com/bphoto/1ySM-LkkgbiyKSVuVi5MPQ/90s.jpg">').addClass('restaurant-img'));
+                if(typeof result[i].first.photo != 'undefined'){
+                    result_left.append($('<img src="http:'+ result[i].first.photo+'">').addClass('restaurant-img'));
+                }else{
+                    result_left.append($('<img src="http://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/5f69f303f17c/assets/img/default_avatars/business_medium_square.png">').addClass('restaurant-img'));
+                }
                 result_left.append(btn_div);
                 result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name"));
                 var category_div = create_category(result[i].first.category);
@@ -216,7 +220,6 @@ function clear_button_click_action(){
     });
 }
 function append_dollar_sign(elem, price){
-    price = 2;
     for(var i = 0; i < price; i++){
         elem.append($('<i class="fa fa-usd"></i>'));
     }
@@ -242,9 +245,8 @@ function search_button_click_action(){
             $('#contact').hide();
             
             $('#search-result').show();
-            $('.result_area').clone(true).appendTo('.new-input-area');
+            $('.result_area').appendTo('.new-input-area');
             quota_control();
-            //get_catogories();
             $('.page-header').hide();
             $('.select2-container').css('margin-left', '0px');
             $('#s2id_tags').css('width', '200px');

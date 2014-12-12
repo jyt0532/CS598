@@ -163,8 +163,8 @@ function send_ajax_and_show_result(distance, lat, lng){
             for(var i = 0; i < result.length; i++){
                 var restaurant_div = new_elem("div", "", "result"+i).addClass("row");
                 var result_top = new_elem("div", "", "result-top-"+i).addClass("result-top");
-                //var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
-                var result_left = new_elem("div", new_elem("span", result[i].second), "result"+i+"_left").addClass("left-result col-md-2");
+                var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
+                //var result_left = new_elem("div", new_elem("span", result[i].second), "result"+i+"_left").addClass("left-result col-md-2");
                 var result_middle = new_elem("div", "", "result"+i+"_middle").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
                 var show_and_hide_btn = new_elem("button", new_elem("span", "Show", "show-btn-text-"+i), "show-btn-"+i).addClass("btn btn-default btn-sm chart-btn show-hide-btn").attr("num", i).attr("status", 0).prepend(new_elem('i').addClass('fa fa-bar-chart'));
@@ -188,9 +188,9 @@ function send_ajax_and_show_result(distance, lat, lng){
                 restaurant_div.append(result_top);
                 var result_bot = new_elem("div", "", "result-bot-"+i).addClass("result-bot");
                 var graph_btn = new_elem("div","", "graph-btn"+i).addClass("show-graph-btn");
-                graph_btn.append(new_elem("div", new_elem("button", "Price", "btn-price-"+i).addClass('btn-link')));
-                graph_btn.append(new_elem("div", new_elem("button", "Taste", "btn-taste-"+i).addClass('btn-link')));
-                graph_btn.append(new_elem("div", new_elem("button", "Environment", "btn-environment-"+i).addClass('btn-link')));
+                graph_btn.append(new_elem("div", new_elem("button", "Price", "btn-price-"+i).addClass('btn-link-price btn-link').attr("num", i)));
+                graph_btn.append(new_elem("div", new_elem("button", "Taste", "btn-taste-"+i).addClass('btn-link-taste btn-link').attr("num", i)));
+                graph_btn.append(new_elem("div", new_elem("button", "Environment", "btn-environment-"+i).addClass('btn-link-envi btn-link').attr("num", i)));
                 result_bot.append(graph_btn);
                 result_bot.append(new_elem("div","", "graph-"+i).addClass("show-graph"));
                 restaurant_div.append(result_bot);
@@ -200,6 +200,8 @@ function send_ajax_and_show_result(distance, lat, lng){
                 $('#result'+ i +'_phone').prepend($('<i class="fa fa-phone"></i>'));
                 prepend_rating($('#result' + i + '_rating'), parseFloat(result[i].first.rating));
                 append_dollar_sign($('#result' + i + '_price'), result[i].first.price);
+                draw_all_points($("#graph-"+i), result[i].first.rnn);
+                btn_link_action();
             }
             $('.result-bot').hide();
             show_and_hide_btn_clicked();
@@ -211,20 +213,39 @@ function send_ajax_and_show_result(distance, lat, lng){
     "post"
     );
 }
-function draw_point(elem, x,y){
-    var middle = [593, 349];
-    var semi_major_axis = 329;
-    var semi_minor_axis = 138;
+function btn_link_action(){
+    $('.btn-link-taste').click(function(){
+            $("#graph-" + $(event.currentTarget).attr("num") +" div").hide();
+            $("#graph-" + $(event.currentTarget).attr("num") +" .taste").show();
+    });
+    $('.btn-link-price').click(function(){
+            $("#graph-" + $(event.currentTarget).attr("num") +" div").hide();
+            $("#graph-" + $(event.currentTarget).attr("num") +" .price").show();
+    });
+    $('.btn-link-envi').click(function(){
+            $("#graph-" + $(event.currentTarget).attr("num") +" div").hide();
+            $("#graph-" + $(event.currentTarget).attr("num") +" .envi").show();
+    });
 
+}
+function draw_all_points(elem, rnn_arr){
+    for(var i = 0; i < rnn_arr.length; i++){
+        draw_point(elem, rnn_arr[i], rnn_arr[i]);
+    }
+}
+function draw_point(elem, x,y){
+
+    var pos_x = (parseFloat(x.rnnValue)+1)/2*545 - 7;
+    var pos_y = (parseFloat(y.rnnValue)+1)/2*200 - 5;
     //var x = item["rnnValue"]*semi_major_axis + middle[0];
     //var y = item["normalizedArousal"]*semi_minor_axis + middle[1];
-    var point = $("<div class=\"circle\"></div>");
+    var point = new_elem("div").addClass("circle " + x.type);
     //point.css("left", x.toString().concat("px"));
-    point.css("left", x+"px");
+    point.css("left", pos_x+"px");
     //point.css("top", y.toString().concat("px"));
-    point.css("top", y+"px");
-    //point.popover({title:'Tweet', content: item["tweetContent"], trigger:'hover', container: 'body'
-    //        ,delay: {show: 50, hide: 100}});
+    point.css("top", pos_y+"px");
+    point.popover({content: x.text, trigger:'hover', container: 'body'
+      ,delay: {show: 50, hide: 100}});
     elem.append(point);
 }
 function create_category(category){

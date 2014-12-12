@@ -137,7 +137,7 @@ function quota_control(){
 }
 function send_ajax_and_show_result(distance, lat, lng){
             var category = [];
-            for(var i = 0; i < $('.select2-search-choice-close').length/2; i++){
+            for(var i = 0; i < $('.select2-search-choice-close').length; i++){
             category.push($($('.select2-search-choice-close')[i]).prev().text());
             }
             var pref = [];
@@ -175,7 +175,7 @@ function send_ajax_and_show_result(distance, lat, lng){
                 }
                 //result_left.append(btn_div);
                 result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name").prepend(new_elem("span",i+1).addClass("rank-number")));
-                var category_div = create_category(result[i].first.category);
+                var category_div = create_category(result[i].first.category,i);
                 result_middle.append(category_div);
                 result_middle.append(new_elem("div", "", "result"+ i + "_rating"));
                 result_middle.append(new_elem("div", "", "result"+ i + "_price"));
@@ -203,6 +203,7 @@ function send_ajax_and_show_result(distance, lat, lng){
             }
             $('.result-bot').hide();
             show_and_hide_btn_clicked();
+            home_btn_clicked()
             placeMarkers(result, map);
             },
     function(response){
@@ -227,11 +228,17 @@ function draw_point(elem, x,y){
     //        ,delay: {show: 50, hide: 100}});
     elem.append(point);
 }
-function create_category(category){
-    var category_div = new_elem("div", "", "catogory" + i);
+function create_category(category, i){
+    var category_div = new_elem("div", "", "catogory" + i).addClass("category-text");
     for(var i = 0; i < category.length; i++){
         category_div.append($('<span>'+ category[i]+'</span>'));
-        category_div.append($('<span>&nbsp</span>'));
+        if (i < category.length - 1){
+            category_div.append($('<span>, </span>'));    
+        }
+        else{
+            category_div.append($('<span>&nbsp</span>'));       
+        }
+        
     }
     return category_div;
 }
@@ -251,6 +258,13 @@ function append_dollar_sign(elem, price){
         elem.append($('<i class="fa fa-usd"></i>'));
     }
 }
+
+function home_btn_clicked() {
+    $('#start-searching').click(function(){
+        document.location.reload();
+    });
+}
+
 function show_and_hide_btn_clicked(){
     $('.show-hide-btn').click(function(){
         if($(event.currentTarget).attr("status") == 0){

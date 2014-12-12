@@ -511,7 +511,12 @@ img::-moz-selection {
 }
 
 .rank-number {
-    letter-spacing: 10px;
+    padding-right: 10px;
+}
+
+.category-text {
+    color: gray;
+    font-size: 13px;
 }
 
 .icon-padding {

@@ -3,8 +3,6 @@
   include '../query/util.php';
   include 'filter.php';
 
-  $log = fopen("log.txt","a+");
-
   $raw_category = $_POST["category"];
   $category = json_decode($raw_category);
   $raw_preference = $_POST["preference"];

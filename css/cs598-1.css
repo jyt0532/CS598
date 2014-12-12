@@ -461,3 +461,15 @@ img::-moz-selection {
     padding-right: 15px;
     padding-bottom: 10px;
 }
+
+.text-align-left {
+    text-align: left;
+}
+
+.category-area {
+    width: 100%;    
+}
+
+.butten-right-margin {
+    margin-right: 4px;
+}

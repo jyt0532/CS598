@@ -166,7 +166,7 @@ function send_ajax_and_show_result(distance, lat, lng){
                 var result_left = new_elem("div", new_elem("span", i+1), "result"+i+"_left").addClass("left-result col-md-2");
                 var result_middle = new_elem("div", "", "result"+i+"_middle").addClass("right-result col-md-4");
                 var result_right = new_elem("div", "", "result"+i+"_right").addClass("right-result col-md-6");
-                var show_and_hide_btn = new_elem("button", "Show", "show-btn-"+i).addClass("btn btn-primary btn-small show-hide-btn").attr("num", i).attr("status", 0);
+                var show_and_hide_btn = new_elem("button", "Show", "show-btn-"+i).addClass("btn btn-default btn-sm chart-btn show-hide-btn").attr("num", i).attr("status", 0).prepend(new_elem('i').addClass('fa fa-bar-chart'));
                 var btn_div = new_elem("div", show_and_hide_btn, "btn-div-"+i).addClass('btn-div');
                 if(typeof result[i].first.photo != 'undefined'){
                     result_left.append($('<img src="http:'+ result[i].first.photo+'">').addClass('restaurant-img'));

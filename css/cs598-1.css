@@ -110,6 +110,12 @@ a:focus {
     width: 98.5%;
     height: 600px;
 }
+
+#result-inner-area{
+    padding-left: 30px;
+    padding-right: 50px;
+}
+
 .m_l{
     margin-left: 6px;
 }
@@ -435,20 +441,24 @@ img::-moz-selection {
 
 .search-result-left {
     padding: 0px 0px 15px 0px;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: #B0AEAE;
 }
 
 .search-result-right {
-    padding: 0px 0px 0px 20px;
+    padding: 15px 0px 0px 20px;
 
 }
 
 .borderless_container {
     width: 100%;
-    padding: 15px 0px 0px 15px;
+    padding: 0px 0px 0px 15px;
     margin: 0px 0px 0px 0px;
 }
 
 .result_area {
+    padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 20px;

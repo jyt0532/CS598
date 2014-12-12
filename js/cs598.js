@@ -159,7 +159,7 @@ function send_ajax_and_show_result(distance, lat, lng){
                 body_send
                 ,
             function(result){
-            $('#result-area').empty();
+            $('#result-inner-area').empty();
             for(var i = 0; i < result.length; i++){
                 var restaurant_div = new_elem("div", "", "result"+i).addClass("row");
                 var result_top = new_elem("div", "", "result-top-"+i).addClass("result-top");
@@ -194,8 +194,8 @@ function send_ajax_and_show_result(distance, lat, lng){
                 result_bot.append(graph_btn);
                 result_bot.append(new_elem("div","", "graph-"+i).addClass("show-graph"));
                 restaurant_div.append(result_bot);
-                $('#result-area').append(restaurant_div);
-                $('#result-area').append($('<hr>'));
+                $('#result-inner-area').append(restaurant_div);
+                $('#result-inner-area').append($('<hr>'));
                 $('#result'+ i +'_address').prepend($('<i class="fa fa-map-marker"></i>'));
                 $('#result'+ i +'_phone').prepend($('<i class="fa fa-phone"></i>'));
                 prepend_rating($('#result' + i + '_rating'), parseFloat(result[i].first.rating));

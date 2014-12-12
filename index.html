@@ -1,201 +1,234 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="js/cs598.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="./cs598.css" />
+    <head>
 
-<body>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-<script src="http://code.jquery.com/jquery.js"></script>
-<!--<script src="bootstrap/js/bootstrap.min.js"></script>-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <title>Restaurant</title>
 
-</br>
-</br>
-</br>
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/googlemap.css">
+        <script src="js/jquery.js"></script>
+        <script src="js/grayscale.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization,places"></script>
+        <script src="js/googlemap.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/googlemap.css">
 
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="navbar-brand" href="#">Interview Gurus</a>
-        <div class="navbar-collapse collapse">
-          <!--<form class="navbar-form pull-right" name="form" method="post" action="login.php">
-              <a id="newuser_href" href="#NewUser">New User</a>
-	          <input class="span2 form-control" name="username" type="text" placeholder="UserName" id="username">
-            <input class="span2 form-control" name="passwd" type="password" placeholder="Password" id="password">
-            <button type="submit" name="button" class="btn btn-default" id="login">Sign in</button>
-            <button type="submit" class="btn btn-default register" id="register">Register</button> 
-	        </form>-->
-        </div>
-       </div><!--end container -->
-      </div><!--end navbar inner -->
-    </div> <!--end navbar -->
+        <!-- Custom CSS -->
 
- <div class="container">
-            <div class="nav nav-tabs" id="myTab">
- 		 <li class=active> <a id="home_tab" href="#Home" data-toggle="tab">Home</a></li>
-		 <li><a id="search_tab" href="#Search" data-toggle="tab">Search</a></li>
-		 <li><a id="post_tab" href="#Post" data-toggle="tab">Post</a></li>
-            </div> 
+        <!-- Custom Fonts -->
+        <link href="font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
-      <div class="tab-content">
-        <div class="home_div" id="home_div">    
-          <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-            <ol class="carousel-indicators">
-              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-              <li data-target="#myCarousel" data-slide-to="1"></li>
-              <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="item active">
-                <div class="container slide_container">
-                  <div class="carousel-caption">
-                    <h1>Hello, welcome to Restaurant Recommendation</h1>
-                    <h3>Start searching for the best customizied restaurant</h3>
-	            <p><a class="btn btn-lg btn-primary" id="learn_more" role="button">Learn more</a></p>        	
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="container slide_container">
-                  <div class="carousel-caption">
-                    <h1>Search for a restaurant</h1>
-                    <h3>Pick a specific category or enter a keyword</h3>
-		    <p><a class="btn btn-lg btn-primary" id="search_tab_button" role="button">Search now</a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="container slide_container">
-                  <div class="carousel-caption">
-                    <h1>Distribute your quota!</h1>
-	                  <h3>Do not wait until the last minute</h3>
-                    <p><a class="btn btn-lg btn-primary" id="post_tab_button" role="button">Distribute now!</a></p>
-                  </div>
-                </div>
-              </div>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
+
+    </head>
+
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+        <!-- Navigation -->
+        <nav id="main-nav" class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a id="start-searching" class="navbar-brand page-scroll" href="#page-top">
+                    <i class="fa fa-cutlery"></i> <span class="light">FoodHero</span>
+                </a>
             </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-          </div><!-- /.carousel -->
-        </div>
 
-        <div id="search_div" class="search-div">
-          <br>
-          <div class="form-group float_left">
-            <label class="control-label" for="keyword">Keyword:</label>
-            <div class="controls">
-	            <div class="s_inline">
-                <input id="keyword" type="text" class="keyword form-control">
-              </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                    <a href="#page-top"></a>
+                    </li>
+                    <li>
+                    <a  class="page-scroll" id="ys" href="#about">About</a>
+                    </li>
+                    <li>
+                    <a  class="page-scroll" href="#search">Search</a>
+                    </li>
+                    <li>
+                    <a  class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
             </div>
-          </div>
-          <div class="form-group float_left">
-            <label class="control-label" for="category">Category:</label>
-            <div class="controls">
-	            <div class="s_inline">
-                <select id="search_category" class="form-control col-xs-2">...</select>
-                <button id="search_button" class="btn btn-primary" type="button">Search</button>
-              </div> 
-	            <div id="search_result_div" class="s_results">
-                <div id="result_list_div" class="s_results q_titles">
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+        </nav>
+        <!-- Intro Header -->
+        <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">Where to go for lunch?</h1>
+                        <h4 class="intro-text">Customized result by different weights to<br>
+                        price, location, and dining enviroment.
+                        </h4>
+                        <br>
+                        <br>
+                        <a href="#search" class="btn-circle page-scroll">
+                            <i class="fa fa-search animated"></i>
+                        </a>
+                    </div>
                 </div>
-                <div id="result_detail_div" class="s_QandA">
-                  <div class="page-header">
-                    <h1>Customized feature</h1>
-                  </div>
-                  <div><span>Quota remained: </span> <span>15</span></div>
-                  <div><span>Location</span><div>
-                  <div class="btn-group">
-                      <button type="button" class="btn btn-default">1</button>
-                      <button type="button" class="btn btn-default">2</button>
-                      <button type="button" class="btn btn-default">3</button>
-                      <button type="button" class="btn btn-default">4</button>
-                      <button type="button" class="btn btn-default">5</button>
-                  </div>
-                  <div><span>Price</span><div>
-                  <div class="btn-group">
-                      <button type="button" class="btn btn-default">1</button>
-                      <button type="button" class="btn btn-default">2</button>
-                      <button type="button" class="btn btn-default">3</button>
-                      <button type="button" class="btn btn-default">4</button>
-                      <button type="button" class="btn btn-default">5</button>
-                  </div>
-                  <div><span>Category</span><div>
-                  <div class="btn-group" role="group" arial-label="Third group">
-                      <button type="button" class="btn btn-default">1</button>
-                      <button type="button" class="btn btn-default">2</button>
-                      <button type="button" class="btn btn-default">3</button>
-                      <button type="button" class="btn btn-default">4</button>
-                      <button type="button" class="btn btn-default">5</button>
-                  </div>
-                  <div><span>Service</span><div>
-                  <div class="btn-group" role="group" arial-label="Fourth group">
-                      <button type="button" class="btn btn-default">1</button>
-                      <button type="button" class="btn btn-default">2</button>
-                      <button type="button" class="btn btn-default">3</button>
-                      <button type="button" class="btn btn-default">4</button>
-                      <button type="button" class="btn btn-default">5</button>
-                  </div>
-                  <div><span>Overall</span><div>
-                  <div class="btn-group" role="group" arial-label="Fifth group">
-                      <button type="button" class="btn btn-default">1</button>
-                      <button type="button" class="btn btn-default">2</button>
-                      <button type="button" class="btn btn-default">3</button>
-                      <button type="button" class="btn btn-default">4</button>
-                      <button type="button" class="btn btn-default">5</button>
-                  </div>
-
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-   </div><!--end search division-->
-   <div class="post-div" id="post_div">
-      <br>
-      <form role="form">
-        <div class="form-group">
-          <label for="category">Category:</label>
-          <div class="p_inline">
-            <select id="post_category" class="form-control">...</select>
-          </div>
+        </header>
+        <div id="search-result" class="container borderless_container">
+            <div class="row">
+                <div class="col-md-3 search-result-left">
+                    <div class="new-input-area">
+                    </div>    
+
+                    <div class = "search-result-slider">
+                    <div id="slider-range-min"></div>
+                    <div class = "row">
+                        <div class = "col-md-7">
+                            <span>Maximum distance:</span>
+                        </div>
+                        <div class = "col-md-5">
+                            <span id="distance">1000 meter</span>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="map-area" id="googleMap">
+                    </div>
+                    <br>
+                    <br>
+                    
+                </div>
+                <div class="col-md-9 search-result-right">
+                    <div id="result-area">
+                        <div id = "result-inner-area">
+                        <div class="row">
+                            <div id="22" class="col-md-2"></div>
+                            <div id="33" class="col-md-6"></div>
+                            <div id="44" class="col-md-4"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-         <label for="title">Title:</label>
-          <div class= "p_inline"> 
-	   <input type="text" class="title form-control"
-              placeholder="Type title here"
-              id="question_title_text"
-              rows="1"
-              maxlength="100">
-	  </div>
+        <!-- About Section -->
+        <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>About</h2>
+                <p>FoodHero is a customized resteraunt search engine. </br> Our restaurant data and reviews was from 
+                <a href="http://startbootstrap.com/template-overviews/grayscale/">yelp.com</a>
+                .</p>
+                <p>Differnt user usually have different preference about price, location and environment. Even a same user will not have same needs in different seaches. By using FoodHero, user can give differnt weights to each aspect based on their searching preference.
+                </p>
+                <br>
+                <br>
+                <br>
+                <br>
+
+            </div>
         </div>
+        </section>
 
-        <div class="form-group">
-          <label class="control-label" for="question">Question:</label>
-           <div class="p_inline">
-	    <textarea type="text" class="q_text_area form-control"
-              placeholder="Type question here"
-              id="question_text"
-              rows="10"
-              maxlength="5000"></textarea>
-            </br>
-            <button id="post_question_button" class="btn btn-primary" type="button">Post Question</button><br>
-         </div>
-	 </div>
-    </form>
 
-   </div>
-  </div><!--end tab-content-->
+        <!-- Search Section -->
+        <section id="search" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 main-search">
+                <div class="result_area">
+                    <div id="result_detail_div">
 
- </div><!--end container-->
+                        <div class="page-header">
+                            <h2>Customized feature</h2>
+                        </div>
+                        <div class="input-area">
+                            <div id="quota-area" class = "padding-b-10">
+                                <span>Quota remained: </span> 
+                                <span id="quota_num">9</span>
+                                <i id = "ex" class="fa fa-exclamation"></i>
+                            </div>
+                        </div>
+                        <div class = "category-area">
+                            <br>
+                            <div class = "text-align-left padding-b-2"><span>Categories: (optional) </span></div>
+                            <select multiple id="tags" style="width:330px"></select>
+                        </div>
+                        <br>
+                        <div>
+                            <button id="search-btn" class="btn btn-primary butten-right-margin" href="main-nav">Search</button>
+                            <button id="clear-btn" class="btn btn-danger butten-right-margin">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        </section>
 
-</body>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Contact Us</h2>
+                <p>Feel free to email us to provide some feature on our website, give us suggestions for new ideas and functionality, or to just say hello!</p>
+                <p><a href="mailto:bchiang3@illinois.edu">bchiang3@illinois.edu</a>
+                </p>
+            </div>
+        </div>
+        </section>
+        <br>
+        <br>
+        <br>
+        <!-- Footer -->
+        <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; FoodHero 2014</p>
+        </div>
+        </footer>
+
+        <!-- jQuery -->
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="js/jquery.easing.min.js"></script>
+
+        <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="select2-3.5.2/select2.min.js"></script>
+        <script src="select2-3.5.2/"></script>
+        <link href="select2-3.5.2/select2.css" rel="stylesheet">
+        <script src="js/cs598.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <link href="css/cs598-1.css" rel="stylesheet">
+    </body>
 
 </html>
-

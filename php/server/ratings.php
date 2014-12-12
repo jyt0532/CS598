@@ -22,7 +22,7 @@
 
 
 
-  $q = new Query("../db/category.json", "../db/restaurant_index_5.json", "../db/mapping.json", "../db/rating.json", "../db/RestaurantAddress.json");
+  $q = new Query("../db/category.json", "../db/restaurant_index_final.json", "../db/mapping.json", "../db/rating.json", "../db/RestaurantAddress.json");
 
   $restaurants = $q -> getAllRestaurantWithCategory($category);
   $restaurants = $q -> convertRestaurantAddressToCoord($restaurants);

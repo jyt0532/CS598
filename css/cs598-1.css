@@ -61,6 +61,52 @@ a:focus {
     text-decoration: none;
     color: #11505d;
 }
+.result-top{
+    overflow: hidden;
+}
+.result-bot{
+    margin-left: 25px;
+    margin-top: 20px; 
+    overflow: hidden;
+}
+.restaurant-img{
+    margin-left: 17px;
+    border-radius: 30px;
+    width: 100px;
+}
+.btn-div{
+    margin-top: 14px;
+    margin-left: 0px;
+}
+
+.btn-link {
+    height: 23px;
+}
+.circle {
+    display: block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 40px; 
+    background-color: #693768;
+}
+.show-graph{                                                                                                                
+    height: 225px;
+    width: 600px;
+    background-image: url(../img/graph.jpg);
+    background-repeat:no-repeat;
+    background-size:  contain;
+    background-position:center;
+    float: left;
+    margin-left: 17px;
+}
+.show-graph-btn{
+    width: 110px;
+    float: left;
+    margin-left: 10px;
+}
 #slider-range-min{
     width: 290px;
     margin: 10px 0px 5px 0px;
@@ -71,6 +117,12 @@ a:focus {
     width: 98.5%;
     height: 600px;
 }
+
+#result-inner-area{
+    padding-left: 30px;
+    padding-right: 50px;
+}
+
 .m_l{
     margin-left: 6px;
 }
@@ -336,19 +388,6 @@ a:focus {
     transition: all .3s ease-in-out;
 }
 
-.btn-default {
-    border: 1px solid #219ab3;
-    color: #219ab3;
-    background-color: transparent;
-}
-
-.btn-default:hover,
-.btn-default:focus {
-    border: 1px solid #219ab3;
-    outline: 0;
-    color: #000;
-    background-color: #219ab3;
-}
 
 ul.banner-social-buttons {
     margin-top: 0;
@@ -409,20 +448,24 @@ img::-moz-selection {
 
 .search-result-left {
     padding: 0px 0px 15px 0px;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: #B0AEAE;
 }
 
 .search-result-right {
-    padding: 0px 0px 0px 20px;
+    padding: 15px 0px 0px 20px;
 
 }
 
 .borderless_container {
     width: 100%;
-    padding: 15px 0px 0px 15px;
+    padding: 0px 0px 0px 15px;
     margin: 0px 0px 0px 0px;
 }
 
 .result_area {
+    padding-top: 15px;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 20px;
@@ -458,4 +501,24 @@ img::-moz-selection {
 
 .padding-b-2 {
     padding-bottom: 2px;
+}
+
+.chart-btn {
+    width: 280px;
+    height: 30px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.rank-number {
+    padding-right: 10px;
+}
+
+.category-text {
+    color: gray;
+    font-size: 13px;
+}
+
+.icon-padding {
+    padding-right: 2px;
 }

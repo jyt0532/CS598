@@ -3,23 +3,20 @@
   include '../query/util.php';
   include 'filter.php';
 
-  $log = fopen("log.txt","a+");
-
   $raw_category = $_POST["category"];
   $category = json_decode($raw_category);
   $raw_preference = $_POST["preference"];
   $preference = json_decode($raw_preference);
 
- /* 
+  /*
   $preference = array(3, 3, 3);
   $category = array();
-  */ 
+   */
 
   if(!is_array($preference)) {
       echo "parameter parse error\n";
       return;
   }
-
 
 
   $q = new Query("../db/category.json", "../db/restaurant_index_final.json", "../db/mapping.json", "../db/rating.json", "../db/RestaurantAddress.json");
@@ -43,6 +40,17 @@
 
   usort($ratingPairs, "Pair::cmp");
 
+  $hack = json_decode(file_get_contents("../db/rnn.json"), true);
+  foreach($ratingPairs as &$pair) {
+    
+    $arr = null;
+    $name = $pair -> first["name"];
+    if(array_key_exists($name, $hack)) {
+      $arr = $hack[$name];
+    }
+
+    $pair -> first["rnn"] = $arr;
+  }
  
   echo json_encode($ratingPairs);
 

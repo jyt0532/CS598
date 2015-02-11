@@ -1,6 +1,6 @@
 import json
 
-path = "../rating.txt"
+path = "/Users/johnson/Desktop/UIUC/2014Fall/Advanced Information Retrieval/project/LARAM/Data/Results/prediction.dat"
 f = open(path, 'r')
 
 dic = {}
@@ -12,7 +12,7 @@ for line in f:
   name = (lst[0].split("\t"))[0]
   dic[name] = ratings
 
-with open('rating.json', 'w') as outfile:
+with open('../../../php/db/rating.json', 'w') as outfile:
   json.dump(dic, outfile, indent=2)
 
 f.close()

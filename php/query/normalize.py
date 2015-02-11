@@ -1,7 +1,7 @@
 import json
 import math
 
-f = open('./php/db/rating.json')
+f = open('../db/rating.json')
 data = json.load(f)
 
 ret = {}

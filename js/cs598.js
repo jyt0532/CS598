@@ -174,7 +174,7 @@ function send_ajax_and_show_result(distance, lat, lng){
                     result_left.append($('<img src="http://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/5f69f303f17c/assets/img/default_avatars/business_medium_square.png">').addClass('restaurant-img'));
                 }
                 //result_left.append(btn_div);
-                result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name").prepend(new_elem("span",i+1).addClass("rank-number")));
+                result_middle.append(new_elem("div", result[i].first.name, "result"+ i + "_name").prepend(new_elem("span",i+1 + "->" + result[i].second).addClass("rank-number")));
                 var category_div = create_category(result[i].first.category,i);
                 result_middle.append(category_div);
                 result_middle.append(new_elem("div", "", "result"+ i + "_rating"));
